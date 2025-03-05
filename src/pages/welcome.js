@@ -68,12 +68,12 @@ export default function WelcomePage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 to-black text-white p-4 relative">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-[#0D0D0D] via-[#1A1A1A] to-[#0D0D0D] text-white p-4 relative">
       
       {/* 🔹 Ecrã de carregamento antes de exibir os dados */}
       {isLoading && (
         <div className="absolute inset-0 bg-black bg-opacity-80 flex flex-col items-center justify-center z-50">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-white mb-4"></div>
+          <div className="w-16 h-16 border-4 border-t-[#FF8A00] border-b-[#FF5F00] border-l-transparent border-r-transparent rounded-full animate-spin mb-4"></div>
           <p className="text-lg font-semibold text-white">A carregar...</p>
         </div>
       )}
@@ -84,21 +84,21 @@ export default function WelcomePage() {
           {loading ? (
             <p className="text-gray-400">{messages.button?.loading}</p>
           ) : sessionData ? (
-            <div className="bg-gray-800 text-gray-300 p-4 rounded-md text-sm w-full max-w-md border border-gray-700 shadow-lg">
+            <div className="bg-[#1A1A1A] text-gray-300 p-4 rounded-md text-sm w-full max-w-md border border-[#303030] shadow-lg">
               {/* ✅ Nome do utilizador logado */}
-              <span className="font-semibold text-blue-400">{messages.welcome?.user_label}</span>
+              <span className="font-semibold text-[#FF8A00]">{messages.welcome?.user_label}</span>
               <pre className="mt-2 break-words whitespace-pre-wrap">{sessionData.user.username}</pre>
 
               {/* ✅ Token JWT (caso esteja presente) */}
-              <span className="font-semibold text-blue-400 mt-4 block">Token JWT:</span>
-              <pre className="mt-2 break-words whitespace-pre-wrap text-xs bg-gray-700 p-2 rounded">
+              <span className="font-semibold text-[#FF8A00] mt-4 block">Token JWT:</span>
+              <pre className="mt-2 break-words whitespace-pre-wrap text-xs bg-[#121212] p-2 rounded">
                 {sessionData.token}
               </pre>
 
               {/* ✅ Botão de Logout */}
               <button
                 onClick={handleLogout}
-                className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full transition-transform transform hover:scale-105"
+                className="mt-4 bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] text-white font-bold py-2 px-4 rounded w-full hover:opacity-90 transition-transform transform hover:scale-105"
               >
                 {messages.auth?.logout_button || "Sair"}
               </button>

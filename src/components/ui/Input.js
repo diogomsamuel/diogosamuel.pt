@@ -12,7 +12,7 @@ const Input = forwardRef(({ label, type = "text", name, value, onChange, disable
         value={value}
         onChange={onChange}
         disabled={disabled}
-        className={`w-full mt-1 p-3 border rounded-md bg-gray-800 text-white border-gray-600 focus:ring focus:ring-blue-400 focus:outline-none ${
+        className={`w-full mt-1 p-3 border rounded-md bg-[#1A1A1A] text-white border-[#FF8A00]/20 focus:ring focus:ring-[#FF8A00] focus:border-[#FF8A00] focus:outline-none transition-all ${
           disabled ? "opacity-50 cursor-not-allowed" : ""
         }`}
       />

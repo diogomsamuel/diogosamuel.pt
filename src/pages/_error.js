@@ -17,10 +17,10 @@ export default function ErrorPage({ statusCode }) {
   }, [router]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-6 text-center">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#0D0D0D] text-white p-6 text-center">
       
       {/* ✅ Ícone animado de erro */}
-      <FiAlertTriangle className="text-red-500 text-6xl animate-bounce mb-4" />
+      <FiAlertTriangle className="text-[#FF8A00] text-6xl animate-bounce mb-4" />
       
       {/* ✅ Mensagem dinâmica de erro */}
       <h1 className="text-3xl font-bold">
@@ -32,8 +32,8 @@ export default function ErrorPage({ statusCode }) {
       <p className="text-gray-400 mt-2">{messages.error?.redirecting_auth}</p>
 
       {/* ✅ Barra de progresso do redirecionamento */}
-      <div className="w-40 mt-4 h-1 bg-gray-700 rounded-full overflow-hidden">
-        <div className="w-full h-full bg-red-500 animate-pulse"></div>
+      <div className="w-40 mt-4 h-1 bg-[#1A1A1A] rounded-full overflow-hidden">
+        <div className="w-full h-full bg-[#FF8A00] animate-pulse"></div>
       </div>
 
       {/* ✅ Informação sobre o redirecionamento */}

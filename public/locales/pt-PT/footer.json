@@ -1,0 +1,21 @@
+{
+  "about": "Compartilhando minha jornada fitness e transformação pessoal. Acompanhe minha evolução e aprenda com minhas experiências e descobertas.",
+  "tagline": "Jornada • Treino • Transformação",
+  "quick_links": "Links Rápidos",
+  "about_link": "Sobre Mim",
+  "journey_link": "Minha Jornada",
+  "youtube_link": "YouTube",
+  "plans_link": "Planos",
+  "faq_link": "Perguntas Frequentes",
+  "contact": "Contacto",
+  "newsletter": {
+    "title": "Newsletter",
+    "description": "Acompanhe minha jornada mais de perto. Inscreva-se para receber novidades, dicas e conteúdo exclusivo.",
+    "placeholder": "Seu email",
+    "button": "Inscrever-se"
+  },
+  "copyright": "Todos os direitos reservados.",
+  "terms": "Termos de Uso",
+  "privacy": "Política de Privacidade",
+  "cookies": "Política de Cookies"
+} 

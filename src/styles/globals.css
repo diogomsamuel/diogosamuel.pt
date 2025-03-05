@@ -3,6 +3,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --brand-primary: #FF8A00;
+  --brand-secondary: #FF5F00;
+  --background-dark: #0D0D0D;
+  --background-dark-lighter: #1A1A1A;
 }
 
 @theme inline {
@@ -14,7 +18,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: var(--background-dark);
     --foreground: #ededed;
   }
 }
@@ -23,4 +27,50 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Estilizando scrollbar com as cores da marca */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-dark-lighter);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--brand-primary), var(--brand-secondary));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-secondary);
+}
+
+/* Estilizando o Toast */
+.Toastify__toast-container {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.Toastify__toast {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  background-color: var(--background-dark-lighter);
+  color: white;
+}
+
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #2b9348, #55a630);
+}
+
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #d00000, #dc2f02);
+}
+
+.Toastify__toast--info {
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+}
+
+.Toastify__progress-bar {
+  background: linear-gradient(to right, var(--brand-primary), var(--brand-secondary));
 }

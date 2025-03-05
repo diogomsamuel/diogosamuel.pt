@@ -1,0 +1,22 @@
+{
+  "database": {
+    "db_online": "BD Online",
+    "db_offline": "BD Offline",
+    "db_offline_message": "A base de dados está indisponível. Tente mais tarde."
+  },
+  "server": {
+    "server_offline": "Erro de ligação ao servidor"
+  },
+  "error": {
+    "page_not_found": "Página não encontrada",
+    "server_error": "Erro de ligação ao servidor",
+    "redirecting_auth": "A redirecionar para a autenticação..."
+  },
+  "welcome": {
+    "title": "Bem-vindo",
+    "session_expired": "Sessão expirada. A redirecionar..."
+  },
+  "button": {
+    "loading": "A verificar a sua sessão..."
+  }
+} 

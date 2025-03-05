@@ -1,0 +1,49 @@
+{
+  "hero": {
+    "title": "DIOGO SAMUEL",
+    "tagline": "TREINO • CONSISTÊNCIA • RESULTADOS",
+    "description": "A documentar a minha jornada fitness desde o início.",
+    "cta": "Vamos crescer e evoluir juntos.",
+    "view_plans_button": "VER PLANOS DE TREINO",
+    "my_journey_button": "A MINHA JORNADA"
+  },
+  "about": {
+    "badge": "A Minha Jornada",
+    "title": "A Transformar o Meu Corpo e Conhecimento",
+    "content1": "Olá, sou o Diogo Samuel. Comecei a minha jornada de treino há relativamente pouco tempo, mas a minha paixão pelo fitness e programação levou-me a estudar profundamente sobre ciência do treino e nutrição.",
+    "content2": "Decidi combinar estas duas paixões: criar planos de treino baseados em ciência e boas práticas, enquanto documento a minha própria jornada de transformação num canal do YouTube estilo Raw, inspirado pelo Sam Sulek.",
+    "content3": "Os meus planos são claros, diretos e sem floreados — exatamente o que eu queria quando comecei. O meu objetivo é crescer junto contigo e mostrar resultados reais, sem filtros."
+  },
+  "why_follow": {
+    "badge": "Minha Abordagem",
+    "title": "Por Que Acompanhar",
+    "description": "Esta é uma jornada de transformação real, documentada sem filtros. Partilho o que aprendo enquanto percorro o meu próprio caminho.",
+    "reason1": {
+      "title": "Jornada Documentada",
+      "description": "Acompanha em tempo real a minha transformação no YouTube. Aprende com os meus erros e sucessos enquanto aplico o que partilho."
+    },
+    "reason2": {
+      "title": "Conteúdo Direto",
+      "description": "Sem rodeios ou promessas irrealistas. Apenas dicas práticas baseadas na minha experiência pessoal e no que tem funcionado para mim."
+    },
+    "reason3": {
+      "title": "Crescimento Mútuo",
+      "description": "Estou a aprender junto contigo. Partilho descobertas, adaptações e melhorias constantes à medida que evoluo na minha própria jornada."
+    },
+    "reason4": {
+      "title": "Sem Filtros",
+      "description": "Mostro os altos e baixos. Nada é perfeito, e acredito que a transparência total é o melhor caminho para inspirar e ajudar os outros."
+    }
+  },
+  "featured_programs": {
+    "badge": "Planos de Treino",
+    "title": "Programas em Destaque",
+    "description": "Uma seleção dos meus melhores recursos para te ajudar na tua jornada de transformação física.",
+    "view_all_button": "Ver Todos os Produtos"
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Perguntas Frequentes",
+    "description": "Respostas às perguntas mais comuns sobre a minha abordagem e planos de treino."
+  }
+} 

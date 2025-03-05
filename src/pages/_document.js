@@ -12,6 +12,7 @@ export default function Document() {
         <meta name="author" content="Projeto" />
 
         <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </Head>
       <body className="bg-gray-900 text-white antialiased">
         <Main />

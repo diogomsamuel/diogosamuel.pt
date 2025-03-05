@@ -1,8 +1,8 @@
 {
   "id": "/",
-  "name": "N Login",
-  "short_name": "N Login",
-  "description": "N Login - Aplicação Next.js como Progressive Web App",
+  "name": "Diogo Samuel",
+  "short_name": "Diogo Samuel",
+  "description": "Diogo Samuel - Code, lift, repeat",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",

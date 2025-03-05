@@ -1,0 +1,16 @@
+{
+  "title": "Todos os Produtos de Treino",
+  "description": "Encontre o programa ideal para a sua jornada fitness. Todos os planos são baseados na minha experiência e conhecimento, com uma abordagem direta e prática.",
+  "badge": "Planos & Recursos",
+  "categories": {
+    "all": "Todos os Produtos",
+    "gym": "Ginásio",
+    "home": "Em Casa",
+    "nutrition": "Nutrição"
+  },
+  "product": {
+    "includes": "Inclui:",
+    "buy_now": "Comprar Agora"
+  },
+  "back_to_home": "Voltar para Home"
+} 

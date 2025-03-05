@@ -98,23 +98,20 @@ export default function Auth() {
       </Head>
 
       {/* ✅ Estrutura da Página */}
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 to-black text-white relative">
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#0D0D0D] via-[#1A1A1A] to-[#0D0D0D] text-white relative">
         
         {/* ✅ Animação de Carregamento antes de renderizar o conteúdo */}
         {isLoading && (
           <div className="absolute inset-0 bg-black bg-opacity-80 flex flex-col items-center justify-center z-50">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-white mb-4"></div>
+            <div className="w-16 h-16 border-4 border-t-[#FF8A00] border-b-[#FF5F00] border-l-transparent border-r-transparent rounded-full animate-spin mb-4"></div>
             <p className="text-lg font-semibold text-white">A carregar...</p>
           </div>
         )}
 
         {/* ✅ Formulário de Login */}
         {!isLoading && (
-          <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md border border-gray-700 flex flex-col items-center">
-            <div className="flex items-center space-x-3 mb-4">
-              <Image src="/nextjs-icon.svg" alt="Next.js Logo" width={40} height={40} />
-              <h2 className="text-2xl font-semibold">{messages.auth?.login_title}</h2>
-            </div>
+          <div className="bg-[#121212] p-8 rounded-lg shadow-lg w-full max-w-md border border-[#303030] flex flex-col items-center">
+            <h2 className="text-2xl font-semibold text-white mb-6">DIOGO SAMUEL</h2>
 
             <form onSubmit={handleLogin} className="w-full">
               <Input 
@@ -139,7 +136,7 @@ export default function Auth() {
 
               {/* ✅ Link "Recuperar password" desativado se o servidor estiver offline */}
               <div className={`text-center mt-4 text-sm ${serverError || dbStatus === "offline" ? "opacity-50 pointer-events-none" : ""}`}>
-                <a onClick={() => router.push("/recover")} className="text-blue-400 hover:underline cursor-pointer">
+                <a onClick={() => router.push("/recover")} className="text-[#FF8A00] hover:text-[#FF5F00] hover:underline cursor-pointer transition-colors">
                 {messages.recover?.title}
                 </a>
               </div>
@@ -148,7 +145,7 @@ export default function Auth() {
             {/* ✅ Link "Registe-se" desativado se o servidor estiver offline */}
             <p className={`text-center text-sm mt-4 ${serverError || dbStatus === "offline" ? "opacity-50 pointer-events-none" : ""}`}>
               Ainda não tem conta?{" "}
-              <a onClick={() => router.push("/register")} className="text-blue-400 hover:underline cursor-pointer">
+              <a onClick={() => router.push("/register")} className="text-[#FF8A00] hover:text-[#FF5F00] hover:underline cursor-pointer transition-colors">
                 Registe-se
               </a>
             </p>
@@ -160,12 +157,12 @@ export default function Auth() {
           <div className="absolute top-5 right-5 flex items-center space-x-2">
             {serverError === true ? (
               <>
-                <FiAlertTriangle className="text-red-500 text-xl animate-bounce" />
+                <FiAlertTriangle className="text-[#FF5F00] text-xl animate-bounce" />
                 <p className="text-sm text-gray-300">{messages.server?.server_offline}</p>
               </>
             ) : dbStatus === "online" ? (
               <>
-                <span className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
+                <span className="w-3 h-3 rounded-full bg-[#FF8A00] animate-pulse" />
                 <p className="text-sm text-gray-300">{messages.database?.db_online}</p>
               </>
             ) : (
