@@ -1,6 +1,7 @@
-export default function Button({ text, onClick, disabled }) {
+export default function Button({ text, onClick, disabled, type = 'submit' }) {
   return (
     <button
+      type={type}
       onClick={onClick}
       disabled={disabled}
       className={`w-full py-3 rounded-md transition-all duration-200 shadow-md ${
