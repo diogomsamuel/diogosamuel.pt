@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
 import { FeaturedProgramsSection } from "../components/sections/FeaturedProgramsSection";
+import Image from 'next/image';
 
 export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState('all');
