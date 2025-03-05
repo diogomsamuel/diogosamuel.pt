@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export function CTASection() {
   return (
@@ -83,7 +84,7 @@ export function CTASection() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <a 
+          <Link 
             href="/products"
             className="inline-flex items-center gap-2 bg-[#FF8A00] hover:bg-[#FF8A00]/90 text-white font-bold py-4 px-10 rounded-xl text-lg transition-colors duration-300"
           >
@@ -91,7 +92,7 @@ export function CTASection() {
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

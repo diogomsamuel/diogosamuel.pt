@@ -20,7 +20,7 @@ export function AboutSection({ socialLinks }) {
           </h2>
           <div className="text-gray-300 space-y-6 text-lg text-justify">
             <p>
-              Chamo-me Diogo Samuel. De um miúdo magro a <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] font-semibold">'falso magro'</span> em 2020, decidi estudar e treinar a sério. Mesmo com altos e baixos, provei que é possível ter resultados reais sem vida perfeita.
+              Chamo-me Diogo Samuel. De um miúdo magro a <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] font-semibold">&apos;falso magro&apos;</span> em 2020, decidi estudar e treinar a sério. Mesmo com altos e baixos, provei que é possível ter resultados reais sem vida perfeita.
             </p>
             <p>
               O maior plot twist? Perdi-me entre <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] font-semibold">negócios, trabalho e estudos</span>. Ganhei <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] font-semibold">15 Kg</span>, mas agora?  É hora de mostrar que dá para conciliar tudo sem desculpas, sem atalhos.

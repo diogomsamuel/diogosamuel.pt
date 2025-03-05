@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
 import { FeaturedProgramsSection } from "../components/sections/FeaturedProgramsSection";
@@ -177,10 +178,11 @@ export default function Products() {
               {filteredProducts.map((product) => (
                 <div key={product.id} className="bg-[#1A1A1A] rounded-xl overflow-hidden border border-[#303030] hover:border-[#FF8A00] transition-colors">
                   <div className="relative h-48 overflow-hidden">
-                    <img 
+                    <Image 
                       src={product.image} 
                       alt={product.title}
-                      className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+                      fill
+                      className="object-cover transform hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] to-transparent" />
                   </div>
