@@ -14,7 +14,7 @@ export default function ErrorPage({ statusCode }) {
     }, redirectDelay);
 
     return () => clearTimeout(timeout); // Limpeza do timeout caso o utilizador saia antes
-  }, [router]);
+  }, [router, redirectDelay]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#0D0D0D] text-white p-6 text-center">

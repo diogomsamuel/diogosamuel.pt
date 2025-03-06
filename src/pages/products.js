@@ -1,139 +1,127 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
 import { FeaturedProgramsSection } from "../components/sections/FeaturedProgramsSection";
 import Image from 'next/image';
+import axiosInstance from "../lib/axiosInstance";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router";
 
 export default function Products() {
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [isLoading, setIsLoading] = useState(true);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const router = useRouter();
 
-  // Categorias de produtos
-  const categories = [
-    { id: 'all', name: 'Todos os Planos' },
-    { id: 'gym', name: 'Ginásio' },
-    { id: 'home', name: 'Em Casa' },
-    { id: 'nutrition', name: 'Nutrição' }
-  ];
-
-  // Produtos regulares
-  const products = [
-    {
-      id: 1,
-      title: 'Plano Básico de Hipertrofia',
-      description: 'Perfeito para iniciantes que querem ganhar massa muscular. Foco nos principais grupos musculares com treinos 3x por semana.',
-      price: '€19.99',
-      originalPrice: '€29.99',
-      discount: '33% DESC',
-      category: 'gym',
-      image: '/images/programs/hipertrofia-basico.jpg',
-      features: [
-        'Treinos 3x por semana',
-        'Foco em exercícios compostos',
-        'Guia de execução dos exercícios',
-        'Planilha de progressão',
-        'Suporte via e-mail'
-      ]
-    },
-    {
-      id: 2,
-      title: 'Plano Intermediário 5x',
-      description: 'Para praticantes com experiência. Divisão de treino em 5 dias focando em grupos musculares específicos.',
-      price: '€29.99',
-      originalPrice: '€39.99',
-      discount: '25% DESC',
-      category: 'gym',
-      image: '/images/programs/intermediario-5x.jpg',
-      features: [
-        'Treinos 5x por semana',
-        'Divisão muscular otimizada',
-        'Técnicas avançadas de treino',
-        'Periodização de cargas',
-        'Suporte via e-mail'
-      ]
-    },
-    {
-      id: 3,
-      title: 'Plano Avançado PPL',
-      description: 'Programa Push/Pull/Legs para maximizar os ganhos musculares. Recomendado para praticantes avançados.',
-      price: '€39.99',
-      originalPrice: '€49.99',
-      discount: '20% DESC',
-      category: 'gym',
-      image: '/images/programs/avancado-ppl.jpg',
-      features: [
-        'Treinos 6x por semana',
-        'Sistema Push/Pull/Legs',
-        'Técnicas de intensificação',
-        'Periodização avançada',
-        'Suporte via e-mail'
-      ]
-    },
-    {
-      id: 4,
-      title: 'Treino em Casa - Básico',
-      description: 'Treinos eficientes sem equipamento. Ideal para quem não tem acesso a ginásio.',
-      price: '€14.99',
-      originalPrice: '€24.99',
-      discount: '40% DESC',
-      category: 'home',
-      image: '/images/programs/casa-basico.jpg',
-      features: [
-        'Treinos com peso corporal',
-        'Exercícios para todos os grupos musculares',
-        'Guia de execução detalhado',
-        'Progressões para cada exercício',
-        'Suporte via e-mail'
-      ]
-    },
-    {
-      id: 5,
-      title: 'Treino em Casa - Completo',
-      description: 'Programa completo usando apenas peso corporal e equipamentos básicos em casa.',
-      price: '€24.99',
-      originalPrice: '€34.99',
-      discount: '28% DESC',
-      category: 'home',
-      image: '/images/programs/casa-completo.jpg',
-      features: [
-        'Treinos com equipamentos básicos',
-        'Plano de progressão detalhado',
-        'Vídeos explicativos',
-        'Variações para cada nível',
-        'Suporte via e-mail'
-      ]
-    },
-    {
-      id: 6,
-      title: 'Plano Nutricional Hipertrofia',
-      description: 'Plano de alimentação focado em ganho de massa muscular, com opções para diferentes preferências alimentares.',
-      price: '€34.99',
-      originalPrice: '€44.99',
-      discount: '22% DESC',
-      category: 'nutrition',
-      image: '/images/programs/nutricao-hipertrofia.jpg',
-      features: [
-        'Cálculo personalizado de macros',
-        'Lista de substituições de alimentos',
-        'Receitas práticas e saudáveis',
-        'Guia de suplementação',
-        'Suporte via e-mail'
-      ]
+  useEffect(() => {
+    // Fetch products from the API
+    const fetchProducts = async () => {
+      try {
+        const { data } = await axiosInstance.get("/api/plans");
+        
+        if (data.success) {
+          // Transform API data to match the UI format
+          const formattedProducts = data.plans.map(plan => {
+            // Using the first variant as default
+            const defaultVariant = plan.variants && plan.variants.length > 0 ? plan.variants[0] : null;
+            
+            return {
+              id: plan.id,
+              title: plan.name,
+              description: plan.description,
+              image: plan.image_url || "/images/placeholder-plan.jpg",
+              price: defaultVariant ? `${defaultVariant.price}€` : `${plan.base_price}€`,
+              originalPrice: plan.discount_price ? `${plan.base_price}€` : null,
+              discount: plan.discount_percentage ? `${plan.discount_percentage}% OFF` : null,
+              category: plan.category_id,
+              category_name: plan.category_name,
+              features: plan.features ? plan.features.map(f => f.description) : [],
+              variants: plan.variants || [],
+              status: plan.status,
+              is_active: plan.is_active
+            };
+          });
+          
+          setProducts(formattedProducts);
+          setFilteredProducts(formattedProducts);
+          
+          // Extract unique categories
+          const categoriesData = data.categories || [];
+          setCategories(categoriesData);
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        toast.error("Erro ao carregar planos. Por favor, tente novamente mais tarde.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    fetchProducts();
+  }, []);
+  
+  useEffect(() => {
+    if (selectedCategory === 'all') {
+      setFilteredProducts(products);
+    } else {
+      setFilteredProducts(products.filter(product => 
+        product.category == selectedCategory
+      ));
     }
-  ];
-
-  const filteredProducts = selectedCategory === 'all' 
-    ? products 
-    : products.filter(product => product.category === selectedCategory);
+  }, [selectedCategory, products]);
+  
+  const handleCategoryChange = (categoryId) => {
+    setSelectedCategory(categoryId);
+  };
+  
+  const handlePurchase = async (planId, variantId) => {
+    try {
+      setIsProcessing(true);
+      
+      // Check if user is logged in
+      const sessionResponse = await axiosInstance.get("/api/session");
+      if (!sessionResponse.data.valid) {
+        toast.info("Por favor, faça login para comprar este plano.");
+        router.push("/auth?redirect=products");
+        return;
+      }
+      
+      // Create purchase
+      const { data } = await axiosInstance.post("/api/purchases/create", {
+        plan_id: planId,
+        variant_id: variantId || (products.find(p => p.id === planId).variants[0]?.id)
+      });
+      
+      if (data.success && data.checkout_url) {
+        // Redirect to Stripe checkout
+        window.location.href = data.checkout_url;
+      } else {
+        throw new Error("Falha ao criar sessão de checkout");
+      }
+    } catch (error) {
+      console.error("Error creating purchase:", error);
+      toast.error("Erro ao processar compra. Por favor, tente novamente.");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   return (
     <>
       <Head>
         <title>Planos de Treino | Diogo Samuel</title>
-        <meta name="description" content="Planos de treino personalizados para todos os níveis. Transforme seu corpo com programas estruturados e suporte profissional." />
+        <meta name="description" content="Descubra os planos de treino personalizados do Diogo Samuel para transformar o seu corpo e saúde." />
+        <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+
+      <ToastContainer position="top-right" autoClose={5000} />
 
       <main className="bg-[#0D0D0D] min-h-screen">
         <Navbar />
@@ -158,10 +146,20 @@ export default function Products() {
         <section className="py-16 px-4">
           <div className="container mx-auto max-w-6xl">
             <div className="flex flex-wrap justify-center gap-4 mb-12">
+              <button
+                onClick={() => handleCategoryChange('all')}
+                className={`px-6 py-2 rounded-full font-medium transition-colors ${
+                  selectedCategory === 'all'
+                    ? 'bg-[#FF8A00] text-white'
+                    : 'bg-[#1A1A1A] text-gray-400 hover:bg-[#303030]'
+                }`}
+              >
+                Todos
+              </button>
               {categories.map((category) => (
                 <button
                   key={category.id}
-                  onClick={() => setSelectedCategory(category.id)}
+                  onClick={() => handleCategoryChange(category.id)}
                   className={`px-6 py-2 rounded-full font-medium transition-colors ${
                     selectedCategory === category.id
                       ? 'bg-[#FF8A00] text-white'
@@ -172,6 +170,22 @@ export default function Products() {
                 </button>
               ))}
             </div>
+
+            {/* Loading State */}
+            {isLoading && (
+              <div className="flex justify-center py-20">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#FF8A00]"></div>
+              </div>
+            )}
+
+            {/* Empty State */}
+            {!isLoading && filteredProducts.length === 0 && (
+              <div className="text-center py-16">
+                <div className="text-gray-400 mb-4 text-5xl">😢</div>
+                <h3 className="text-xl font-semibold text-white mb-2">Nenhum plano encontrado</h3>
+                <p className="text-gray-400">Não encontrámos planos para esta categoria. Tente outra opção.</p>
+              </div>
+            )}
 
             {/* Products Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -208,8 +222,12 @@ export default function Products() {
                         </li>
                       ))}
                     </ul>
-                    <button className="w-full bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] text-white font-medium py-3 rounded-lg hover:opacity-90 transition-opacity">
-                      Comprar Agora
+                    <button 
+                      onClick={() => handlePurchase(product.id)}
+                      disabled={isProcessing}
+                      className="w-full bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] text-white font-medium py-3 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isProcessing ? 'Processando...' : 'Comprar Agora'}
                     </button>
                   </div>
                 </div>
