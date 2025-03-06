@@ -11,7 +11,9 @@
     "login_error": "Erro ao iniciar sessão. Tente novamente.",
     "user_not_found": "E-mail ou palavra-passe incorretos. Tente novamente.",
     "loading_auth": "A autenticar...",
-    "verifying": "A verificar ligação..."
+    "verifying": "A verificar ligação...",
+    "logout_button": "Sair",
+    "logout_success": "Sessão terminada com sucesso!"
   },
   "database": {
     "db_online": "BD Online",
@@ -47,7 +49,25 @@
   },
   "welcome": {
     "title": "Bem-vindo",
-    "session_expired": "Sessão expirada. A redirecionar..."
+    "dashboard_title": "Painel Principal",
+    "session_expired": "Sessão expirada. A redirecionar...",
+    "user_label": "Utilizador",
+    "my_profile": "Meu Perfil",
+    "my_plans": "Meus Planos",
+    "settings": "Definições",
+    "support": "Suporte",
+    "account_info": "Informações da Conta",
+    "subscription_status": "Estado da Subscrição",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "last_login": "Último Acesso",
+    "plan_details": "Detalhes do Plano",
+    "no_plans": "Sem planos ativos",
+    "view_all_plans": "Ver todos os planos",
+    "actions": "Ações Rápidas",
+    "update_profile": "Atualizar Perfil",
+    "buy_plan": "Comprar Plano",
+    "contact_support": "Contactar Suporte"
   },
   "button": {
     "loading": "A verificar a sua sessão..."
