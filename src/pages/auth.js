@@ -9,6 +9,7 @@ import Button from "../components/ui/Button"; // Componente Button
 import Image from "next/image"; // Componente Image
 import { FiAlertTriangle } from "react-icons/fi"; // Ícone de erro
 import axiosInstance from "../lib/axiosInstance"; // 🚀 Importação do axiosInstance
+import { motion } from "framer-motion"; // Importação do motion para animações
 //import PwaInstallButton from "@/components/PwaInstallButton";
 
 export default function Auth() {
@@ -98,7 +99,9 @@ export default function Auth() {
       </Head>
 
       {/* ✅ Estrutura da Página */}
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#0D0D0D] via-[#1A1A1A] to-[#0D0D0D] text-white relative">
+      <div className="flex items-center justify-center min-h-screen bg-[#0D0D0D] text-white relative">
+        <div className="absolute inset-0 bg-noise opacity-50"></div>
+        <div className="absolute inset-0 bg-gradient-radial from-[#FF8A00]/10 via-transparent to-transparent"></div>
         
         {/* ✅ Animação de Carregamento antes de renderizar o conteúdo */}
         {isLoading && (
@@ -110,45 +113,58 @@ export default function Auth() {
 
         {/* ✅ Formulário de Login */}
         {!isLoading && (
-          <div className="bg-[#121212] p-8 rounded-lg shadow-lg w-full max-w-md border border-[#303030] flex flex-col items-center">
-            <h2 className="text-2xl font-semibold text-white mb-6">DIOGO SAMUEL</h2>
+          <div className="bg-[#1A1A1A]/50 backdrop-blur-sm p-8 rounded-xl shadow-2xl border border-[#333] w-full max-w-md flex flex-col items-center relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="w-full"
+            >
+              <h2 className="text-3xl font-bold text-center text-white mb-8">DIOGO SAMUEL</h2>
 
-            <form onSubmit={handleLogin} className="w-full">
-              <Input 
-                label={messages.auth?.email_label} 
-                type="email" 
-                name="email" 
-                value={formData.email} 
-                onChange={handleChange} 
-                ref={emailInputRef} 
-                disabled={serverError || dbStatus === "offline"}
-              />
-              <Input 
-                label={messages.auth?.password_label} 
-                type="password" 
-                name="password" 
-                value={formData.password} 
-                onChange={handleChange} 
-                disabled={serverError || dbStatus === "offline"}
-              />
+              <form onSubmit={handleLogin} className="w-full space-y-6">
+                <Input 
+                  label={messages.auth?.email_label} 
+                  type="email" 
+                  name="email" 
+                  value={formData.email} 
+                  onChange={handleChange} 
+                  ref={emailInputRef} 
+                  disabled={serverError || dbStatus === "offline"}
+                  className="bg-[#1A1A1A] border-[#333] focus:border-[#FF8A00] focus:ring-[#FF8A00]"
+                />
+                <Input 
+                  label={messages.auth?.password_label} 
+                  type="password" 
+                  name="password" 
+                  value={formData.password} 
+                  onChange={handleChange} 
+                  disabled={serverError || dbStatus === "offline"}
+                  className="bg-[#1A1A1A] border-[#333] focus:border-[#FF8A00] focus:ring-[#FF8A00]"
+                />
 
-              <Button text={messages.auth?.login_button} disabled={serverError || dbStatus === "offline"} />
+                <Button 
+                  text={messages.auth?.login_button} 
+                  disabled={serverError || dbStatus === "offline"}
+                  className="w-full py-3 bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                />
 
-              {/* ✅ Link "Recuperar password" desativado se o servidor estiver offline */}
-              <div className={`text-center mt-4 text-sm ${serverError || dbStatus === "offline" ? "opacity-50 pointer-events-none" : ""}`}>
-                <a onClick={() => router.push("/recover")} className="text-[#FF8A00] hover:text-[#FF5F00] hover:underline cursor-pointer transition-colors">
-                {messages.recover?.title}
+                {/* ✅ Link "Recuperar password" */}
+                <div className={`text-center mt-4 text-sm ${serverError || dbStatus === "offline" ? "opacity-50 pointer-events-none" : ""}`}>
+                  <a onClick={() => router.push("/recover")} className="text-[#FF8A00] hover:text-[#FF5F00] hover:underline cursor-pointer transition-colors">
+                    {messages.recover?.title}
+                  </a>
+                </div>
+              </form>
+              
+              {/* ✅ Link "Registe-se" */}
+              <p className={`text-center text-sm mt-6 ${serverError || dbStatus === "offline" ? "opacity-50 pointer-events-none" : ""}`}>
+                Ainda não tem conta?{" "}
+                <a onClick={() => router.push("/register")} className="text-[#FF8A00] hover:text-[#FF5F00] hover:underline cursor-pointer transition-colors">
+                  Registe-se
                 </a>
-              </div>
-            </form>
-            
-            {/* ✅ Link "Registe-se" desativado se o servidor estiver offline */}
-            <p className={`text-center text-sm mt-4 ${serverError || dbStatus === "offline" ? "opacity-50 pointer-events-none" : ""}`}>
-              Ainda não tem conta?{" "}
-              <a onClick={() => router.push("/register")} className="text-[#FF8A00] hover:text-[#FF5F00] hover:underline cursor-pointer transition-colors">
-                Registe-se
-              </a>
-            </p>
+              </p>
+            </motion.div>
           </div>
         )}
 

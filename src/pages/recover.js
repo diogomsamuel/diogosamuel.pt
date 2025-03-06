@@ -6,6 +6,7 @@ import Input from "../components/ui/Input"; // Componente reutilizável de Input
 import Button from "../components/ui/Button"; // Componente reutilizável de Button
 import { useRouter } from "next/router"; // Hook de navegação do Next.js
 import useMessages from "../hooks/useMessages"; // Hook para mensagens dinâmicas
+import { motion } from "framer-motion";
 
 export default function RecoverPassword() {
   const messages = useMessages(); // Hook para mensagens traduzidas
@@ -58,28 +59,36 @@ export default function RecoverPassword() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 to-black text-white relative">
+    <div className="flex items-center justify-center min-h-screen bg-[#0D0D0D] text-white relative">
+      <div className="absolute inset-0 bg-noise opacity-50"></div>
+      <div className="absolute inset-0 bg-gradient-radial from-[#FF8A00]/10 via-transparent to-transparent"></div>
       
       {/* ✅ Ecrã de carregamento antes de exibir o formulário */}
       {isLoading && (
         <div className="absolute inset-0 bg-black bg-opacity-80 flex flex-col items-center justify-center z-50">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-white mb-4"></div>
+          <div className="w-16 h-16 border-4 border-t-[#FF8A00] border-b-[#FF5F00] border-l-transparent border-r-transparent rounded-full animate-spin mb-4"></div>
           <p className="text-lg font-semibold text-white">A carregar...</p>
         </div>
       )}
 
       {/* ✅ Formulário de recuperação de senha */}
       {!isLoading && (
-        <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md border border-gray-700 flex flex-col items-center">
-          
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-[#1A1A1A]/50 backdrop-blur-sm p-8 rounded-xl shadow-2xl border border-[#333] w-full max-w-md relative z-10"
+        >
           {/* ✅ Logo e título */}
-          <div className="flex items-center space-x-3 mb-4">
-            <Image src="/nextjs-icon.svg" alt="Next.js Logo" width={40} height={40} />
-            <h2 className="text-2xl font-semibold">{messages.recover?.title}</h2>
+          <div className="flex flex-col items-center space-y-4 mb-8">
+            <h2 className="text-3xl font-bold text-white">{messages.recover?.title}</h2>
+            <p className="text-gray-400 text-center">
+              Insira o seu email para recuperar a sua palavra-passe
+            </p>
           </div>
 
           {/* ✅ Formulário */}
-          <form onSubmit={handleRecover} className="w-full">
+          <form onSubmit={handleRecover} className="space-y-6">
             <Input
               label={messages.recover?.email_label}
               type="email"
@@ -87,23 +96,27 @@ export default function RecoverPassword() {
               value={email}
               onChange={handleChange}
               ref={emailInputRef}
+              className="bg-[#1A1A1A] border-[#333] focus:border-[#FF8A00] focus:ring-[#FF8A00]"
             />
             
             {/* ✅ Botão de recuperação com animação */}
-            <Button text={messages.recover?.recover_button} className="w-full transition-transform transform hover:scale-105" />
+            <Button 
+              text={messages.recover?.recover_button} 
+              className="w-full py-3 bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
+            />
 
             {/* ✅ Link para voltar ao login */}
-            <p className="text-center text-sm mt-4">
+            <p className="text-center text-sm mt-6">
               {messages.recover?.remember_password}{" "}
               <a 
                 onClick={() => router.push("/auth")} 
-                className="text-blue-400 hover:underline cursor-pointer"
+                className="text-[#FF8A00] hover:text-[#FF5F00] hover:underline cursor-pointer transition-colors"
               >
                 {messages.auth?.login_title}
               </a>
             </p>
           </form>
-        </div>
+        </motion.div>
       )}
 
       {/* ✅ Mensagens interativas */}

@@ -9,6 +9,7 @@ import axiosInstance from "../lib/axiosInstance";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -123,11 +124,19 @@ export default function Products() {
 
       <ToastContainer position="top-right" autoClose={5000} />
 
-      <main className="bg-[#0D0D0D] min-h-screen">
+      <main className="bg-[#0D0D0D] min-h-screen relative">
+        <div className="absolute inset-0 bg-noise opacity-50"></div>
+        <div className="absolute inset-0 bg-gradient-radial from-[#FF8A00]/10 via-transparent to-transparent"></div>
+        
         <Navbar />
 
         {/* Header Section */}
-        <section className="pt-32 pb-16 px-4">
+        <motion.section 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="pt-32 pb-16 px-4 relative z-10"
+        >
           <div className="container mx-auto max-w-6xl">
             <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-4">
               Planos de Treino
@@ -137,21 +146,26 @@ export default function Products() {
               Todos os programas incluem suporte personalizado e atualizações gratuitas.
             </p>
           </div>
-        </section>
+        </motion.section>
 
         {/* Featured Programs Section */}
         <FeaturedProgramsSection />
 
         {/* Category Filter */}
-        <section className="py-16 px-4">
+        <section className="py-16 px-4 relative z-10">
           <div className="container mx-auto max-w-6xl">
-            <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex flex-wrap justify-center gap-4 mb-12"
+            >
               <button
                 onClick={() => handleCategoryChange('all')}
-                className={`px-6 py-2 rounded-full font-medium transition-colors ${
+                className={`px-6 py-2 rounded-full font-medium transition-all ${
                   selectedCategory === 'all'
-                    ? 'bg-[#FF8A00] text-white'
-                    : 'bg-[#1A1A1A] text-gray-400 hover:bg-[#303030]'
+                    ? 'bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] text-white shadow-lg'
+                    : 'bg-[#1A1A1A]/50 backdrop-blur-sm text-gray-400 hover:bg-[#1A1A1A] border border-[#333]'
                 }`}
               >
                 Todos
@@ -160,55 +174,70 @@ export default function Products() {
                 <button
                   key={category.id}
                   onClick={() => handleCategoryChange(category.id)}
-                  className={`px-6 py-2 rounded-full font-medium transition-colors ${
+                  className={`px-6 py-2 rounded-full font-medium transition-all ${
                     selectedCategory === category.id
-                      ? 'bg-[#FF8A00] text-white'
-                      : 'bg-[#1A1A1A] text-gray-400 hover:bg-[#303030]'
+                      ? 'bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] text-white shadow-lg'
+                      : 'bg-[#1A1A1A]/50 backdrop-blur-sm text-gray-400 hover:bg-[#1A1A1A] border border-[#333]'
                   }`}
                 >
                   {category.name}
                 </button>
               ))}
-            </div>
+            </motion.div>
 
             {/* Loading State */}
             {isLoading && (
               <div className="flex justify-center py-20">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#FF8A00]"></div>
+                <div className="w-16 h-16 border-4 border-t-[#FF8A00] border-b-[#FF5F00] border-l-transparent border-r-transparent rounded-full animate-spin"></div>
               </div>
             )}
 
             {/* Empty State */}
             {!isLoading && filteredProducts.length === 0 && (
-              <div className="text-center py-16">
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="text-center py-16"
+              >
                 <div className="text-gray-400 mb-4 text-5xl">😢</div>
                 <h3 className="text-xl font-semibold text-white mb-2">Nenhum plano encontrado</h3>
                 <p className="text-gray-400">Não encontrámos planos para esta categoria. Tente outra opção.</p>
-              </div>
+              </motion.div>
             )}
 
             {/* Products Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProducts.map((product) => (
-                <div key={product.id} className="bg-[#1A1A1A] rounded-xl overflow-hidden border border-[#303030] hover:border-[#FF8A00] transition-colors">
+              {filteredProducts.map((product, index) => (
+                <motion.div
+                  key={product.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-[#1A1A1A]/50 backdrop-blur-sm rounded-xl overflow-hidden border border-[#333] hover:border-[#FF8A00] transition-all group"
+                >
                   <div className="relative h-48 overflow-hidden">
                     <Image 
                       src={product.image} 
                       alt={product.title}
                       fill
-                      className="object-cover transform hover:scale-105 transition-transform duration-500"
+                      className="object-cover transform group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] to-transparent opacity-80" />
                   </div>
                   <div className="p-6">
                     <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-xl font-bold text-white">{product.title}</h3>
+                      <h3 className="text-xl font-bold text-white group-hover:text-[#FF8A00] transition-colors">{product.title}</h3>
                       <div className="flex flex-col items-end">
                         <span className="text-[#FF8A00] font-bold text-2xl">{product.price}</span>
-                        <span className="text-gray-500 line-through text-sm">{product.originalPrice}</span>
-                        <span className="bg-[#FF8A00]/10 text-[#FF8A00] text-xs font-medium px-2 py-1 rounded">
-                          {product.discount}
-                        </span>
+                        {product.originalPrice && (
+                          <span className="text-gray-500 line-through text-sm">{product.originalPrice}</span>
+                        )}
+                        {product.discount && (
+                          <span className="bg-[#FF8A00]/10 text-[#FF8A00] text-xs font-medium px-2 py-1 rounded">
+                            {product.discount}
+                          </span>
+                        )}
                       </div>
                     </div>
                     <p className="text-gray-400 mb-6">{product.description}</p>
@@ -225,12 +254,12 @@ export default function Products() {
                     <button 
                       onClick={() => handlePurchase(product.id)}
                       disabled={isProcessing}
-                      className="w-full bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] text-white font-medium py-3 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] text-white font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed transform group-hover:scale-105 duration-300"
                     >
                       {isProcessing ? 'Processando...' : 'Comprar Agora'}
                     </button>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
