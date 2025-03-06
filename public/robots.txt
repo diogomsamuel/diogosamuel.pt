@@ -1,0 +1,15 @@
+# www.robotstxt.org/
+
+User-agent: *
+Allow: /
+Allow: /plans
+Allow: /support
+
+# Disallow private pages
+Disallow: /profile
+Disallow: /payment-success
+Disallow: /payment-cancel
+Disallow: /api/
+
+# Allow sitemap
+Sitemap: https://www.diogosamuel.pt/sitemap.xml 
