@@ -1,0 +1,61 @@
+{
+  "name": "Diogo Samuel - Treino • Consistência • Resultados",
+  "short_name": "Diogo Samuel",
+  "description": "Planos de treino personalizados e a minha jornada fitness documentada",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0D0D0D",
+  "theme_color": "#FF8A00",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/logo192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Planos de Treino",
+      "short_name": "Planos",
+      "description": "Ver planos de treino disponíveis",
+      "url": "/plans",
+      "icons": [{ "src": "/icons/plans.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Perfil",
+      "short_name": "Perfil",
+      "description": "Acesso ao seu perfil",
+      "url": "/profile",
+      "icons": [{ "src": "/icons/profile.png", "sizes": "96x96" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/home.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Página inicial do site Diogo Samuel"
+    },
+    {
+      "src": "/screenshots/plans.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Planos de treino personalizados"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "categories": ["fitness", "health", "lifestyle"],
+  "lang": "pt-PT",
+  "dir": "ltr"
+} 

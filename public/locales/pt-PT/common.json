@@ -8,6 +8,13 @@
     "server_offline": "Erro de ligação ao servidor"
   },
   "error": {
+    "component_error": "Ocorreu um problema",
+    "component_error_message": "Lamentamos, mas ocorreu um erro ao carregar este componente.",
+    "try_again": "Tentar novamente",
+    "go_home": "Ir para a página inicial",
+    "serious_error": "Problema grave detectado",
+    "serious_error_message": "Ocorreram múltiplos erros. Por favor, contacte o suporte técnico.",
+    "contact_support": "Contactar suporte",
     "page_not_found": "Página não encontrada",
     "server_error": "Erro de ligação ao servidor",
     "redirecting_auth": "A redirecionar para a autenticação..."
@@ -18,5 +25,10 @@
   },
   "button": {
     "loading": "A verificar a sua sessão..."
+  },
+  "offline": {
+    "title": "Sem ligação à Internet",
+    "message": "A app está a funcionar em modo offline. Algumas funcionalidades podem estar limitadas.",
+    "reconnect": "Tentar reconectar"
   }
 } 
