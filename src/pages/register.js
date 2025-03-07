@@ -9,6 +9,7 @@ import { useRouter } from "next/router"; // Hook de navegação do Next.js
 import useMessages from "../hooks/useMessages"; // Hook para mensagens dinâmicas
 import Head from 'next/head';
 import RegisterForm from '../components/RegisterForm';
+import { motion } from 'framer-motion';
 
 // Define a URL da API de produção (HTTPS Hosting online)
 const API_URL = process.env.NEXT_PUBLIC_APIS_URL_REMOTE;
@@ -32,20 +33,28 @@ export default function Register() {
         <link rel="canonical" href="https://www.diogosamuel.pt/register" />
       </Head>
 
-      <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+      <main className="min-h-screen bg-[#0D0D0D] relative overflow-hidden">
+        <div className="absolute inset-0 bg-noise opacity-50"></div>
+        <div className="absolute inset-0 bg-gradient-radial from-[#FF8A00]/10 via-transparent to-transparent"></div>
+        
+        <div className="relative z-10 py-12 px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="max-w-7xl mx-auto text-center mb-12"
+          >
+            <h1 className="text-3xl font-bold text-white sm:text-4xl">
               Crie a sua conta
             </h1>
-            <p className="mt-3 text-lg text-gray-500">
+            <p className="mt-3 text-lg text-gray-400">
               Comece a sua jornada de transformação hoje mesmo
             </p>
-          </div>
+          </motion.div>
 
           <RegisterForm />
         </div>
-      </div>
+      </main>
 
       <ToastContainer position="top-right" autoClose={5000} />
     </>
