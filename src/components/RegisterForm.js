@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import axiosInstance from '../lib/axiosInstance';
 
 const API_URL = process.env.NEXT_PUBLIC_APIS_URL_REMOTE;
 
@@ -92,18 +92,25 @@ export default function RegisterForm() {
 
     setLoading(true);
     try {
-      const response = await axios.post(`${API_URL}/api/register`, {
+      const response = await axiosInstance.post("/api/register", {
         ...formData,
         confirmPassword: undefined // Remove confirmPassword antes de enviar
       });
       
       if (response.data.success) {
         toast.success('Registo efetuado com sucesso!');
-        router.push('/auth');
+        // Aguardar um pouco antes de redirecionar para garantir que o toast seja exibido
+        setTimeout(() => router.push('/welcome'), 1500);
       }
     } catch (error) {
       console.error('Erro no registo:', error);
-      const errorMessage = error.response?.data?.error || 'Erro ao efetuar o registo';
+      let errorMessage = 'Erro ao efetuar o registo';
+      
+      // Verificar se há mensagem de erro detalhada da API
+      if (error.response && error.response.data && error.response.data.error) {
+        errorMessage = error.response.data.error;
+      }
+      
       toast.error(errorMessage);
     } finally {
       setLoading(false);
