@@ -1,5 +1,5 @@
 {
-  "name": "Diogo Samuel - Treino • Consistência • Resultados",
+  "name": "Diogo Samuel",
   "short_name": "Diogo Samuel",
   "description": "Planos de treino personalizados e a minha jornada fitness documentada",
   "start_url": "/",
@@ -19,6 +19,30 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
   "shortcuts": [
@@ -27,30 +51,30 @@
       "short_name": "Planos",
       "description": "Ver planos de treino disponíveis",
       "url": "/plans",
-      "icons": [{ "src": "/icons/plans.png", "sizes": "96x96" }]
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
     },
     {
       "name": "Perfil",
       "short_name": "Perfil",
       "description": "Acesso ao seu perfil",
       "url": "/profile",
-      "icons": [{ "src": "/icons/profile.png", "sizes": "96x96" }]
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
     }
   ],
   "screenshots": [
     {
-      "src": "/screenshots/home.png",
+      "src": "/screenshot-wide.png",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
       "label": "Página inicial do site Diogo Samuel"
     },
     {
-      "src": "/screenshots/plans.png",
-      "sizes": "1280x720",
+      "src": "/screenshot-mobile.png",
+      "sizes": "720x1280",
       "type": "image/png",
-      "form_factor": "wide",
-      "label": "Planos de treino personalizados"
+      "form_factor": "narrow",
+      "label": "Versão móvel do site Diogo Samuel"
     }
   ],
   "related_applications": [],

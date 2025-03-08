@@ -206,7 +206,7 @@ export default function WelcomePage() {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  <p className="text-gray-400">{messages.welcome?.no_plans}</p>
+                <p className="text-gray-400">{messages.welcome?.no_plans}</p>
                   <Link 
                     href="/products"
                     className="mt-4 inline-block bg-[#FF8A00]/10 hover:bg-[#FF8A00]/20 text-[#FF8A00] font-medium px-4 py-2 rounded-lg transition-colors"

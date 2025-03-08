@@ -3,7 +3,7 @@
  * Fornece suporte offline e caching de recursos estáticos
  */
 
-const CACHE_NAME = 'diogosamuel-cache-v1';
+const CACHE_NAME = 'diogosamuel-cache-v2';
 
 // Recursos a serem cacheados na instalação
 const PRECACHE_ASSETS = [
@@ -13,10 +13,8 @@ const PRECACHE_ASSETS = [
   '/manifest.json',
   '/logo192.png',
   '/logo512.png',
-  '/locales/pt-PT/common.json',
-  '/locales/pt-PT/home.json',
-  '/locales/pt-PT/auth.json',
-  '/locales/pt-PT/messages.json'
+  '/locales/pt/translation.json',
+  '/locales/pt-PT/translation.json'
 ];
 
 // URLs que devem ser cacheadas sempre que acessadas
@@ -28,6 +26,7 @@ const RUNTIME_CACHE_URLS = [
 // URLs que nunca devem ser cacheadas (como endpoints de API)
 const NEVER_CACHE_URLS = [
   /\/api\//,  // Endpoints de API
+  /api\.diogosamuel\.pt/,  // Domínio da API
   /\/login$/,  // Páginas de autenticação
   /\/register$/,
   /\/profile$/,  // Páginas com dados sensíveis/privados
@@ -78,7 +77,7 @@ self.addEventListener('activate', event => {
 function shouldCache(url) {
   const requestUrl = new URL(url);
   
-  // Não cachear diferentes origens (somente mesma origem)
+  // Não cachear diferentes origens (exceto ativos específicos)
   if (requestUrl.origin !== location.origin && 
       !requestUrl.hostname.endsWith('diogosamuel.pt')) {
     return false;
@@ -86,7 +85,7 @@ function shouldCache(url) {
   
   // Nunca cachear URLs sensíveis
   for (const pattern of NEVER_CACHE_URLS) {
-    if (pattern.test(requestUrl.pathname)) {
+    if (pattern.test(requestUrl.pathname) || pattern.test(requestUrl.href)) {
       return false;
     }
   }
@@ -102,6 +101,13 @@ function shouldCache(url) {
   return false;
 }
 
+// Função auxiliar para verificar se é uma requisição da API
+function isApiRequest(url) {
+  const requestUrl = new URL(url);
+  return requestUrl.hostname.includes('api.diogosamuel.pt') || 
+         requestUrl.pathname.startsWith('/api/');
+}
+
 // Interceptar requisições de rede
 self.addEventListener('fetch', event => {
   // Ignorar requisições non-GET
@@ -109,12 +115,17 @@ self.addEventListener('fetch', event => {
   
   const requestUrl = new URL(event.request.url);
   
+  // Não interceptar requisições para API - deixar o navegador lidar com CORS
+  if (isApiRequest(event.request.url)) {
+    return;
+  }
+  
   // Estratégia de cache: Rede primeiro, fallback para cache ou página offline
   event.respondWith(
     fetch(event.request)
       .then(response => {
         // Verificar se a resposta é válida
-        if (!response || response.status !== 200 || response.type !== 'basic') {
+        if (!response || response.status !== 200) {
           return response;
         }
         
@@ -189,16 +200,8 @@ self.addEventListener('sync', event => {
 // Função para sincronizar dados pendentes quando a conexão for restabelecida
 async function syncPendingData() {
   try {
-    // Aqui você pode implementar lógica para enviar dados armazenados localmente
-    // durante o período offline para o servidor
+    // Implementação básica de sincronização
     console.log('Sync: Checking for pending data to sync');
-    
-    // Exemplo de implementação:
-    // const pendingActions = await getPendingActionsFromIndexedDB();
-    // for (const action of pendingActions) {
-    //   await sendToServer(action);
-    //   await markActionAsSynced(action.id);
-    // }
   } catch (error) {
     console.error('Sync failed:', error);
     throw error; // Re-throw para que o evento sync possa ser reagendado
