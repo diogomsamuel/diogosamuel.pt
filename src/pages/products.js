@@ -83,83 +83,11 @@ export default function Products() {
         }
       } catch (error) {
         console.error("Error fetching products:", error);
-        toast.error("Erro ao carregar planos. Usando dados temporários.");
+        toast.error("Erro ao carregar planos. Por favor, tente novamente mais tarde.");
         
-        // Usar dados mockados temporários para não quebrar a experiência do usuário
-        const mockProducts = [
-          {
-            id: 1,
-            title: 'Plano Hipertrofia',
-            description: 'Plano completo para ganho de massa muscular com treinos 5x por semana.',
-            image: '/images/blog-treino.svg',
-            price: '49.99€',
-            originalPrice: '69.99€',
-            discount: '28% OFF',
-            category: 1,
-            category_name: 'Treino',
-            features: [
-              'Treinos para todos os grupos musculares',
-              'Calendário de 12 semanas',
-              'Vídeos explicativos de cada exercício',
-              'Suporte por 3 meses'
-            ],
-            variants: [],
-            status: 'active',
-            is_active: true
-          },
-          {
-            id: 2,
-            title: 'Plano Nutrição',
-            description: 'Plano nutricional personalizado para maximizar seus ganhos e recuperação.',
-            image: '/images/blog-nutricao.svg',
-            price: '39.99€',
-            originalPrice: '59.99€',
-            discount: '33% OFF', 
-            category: 2,
-            category_name: 'Nutrição',
-            features: [
-              'Cardápio personalizado',
-              'Cálculo de macronutrientes',
-              'Receitas fitness',
-              'Ajustes mensais'
-            ],
-            variants: [],
-            status: 'active',
-            is_active: true
-          },
-          {
-            id: 3,
-            title: 'Plano Completo',
-            description: 'Combinação perfeita de treino e nutrição para resultados máximos.',
-            image: '/images/blog-lifestyle.svg',
-            price: '79.99€',
-            originalPrice: '119.99€',
-            discount: '33% OFF',
-            category: 3,
-            category_name: 'Lifestyle',
-            features: [
-              'Plano de treino completo',
-              'Plano nutricional personalizado',
-              'Suplementação recomendada',
-              'Suporte prioritário',
-              'Consultas mensais online'
-            ],
-            variants: [],
-            status: 'active',
-            is_active: true
-          }
-        ];
-        
-        const mockCategories = [
-          { id: 'all', name: 'Todos' },
-          { id: 1, name: 'Treino' },
-          { id: 2, name: 'Nutrição' },
-          { id: 3, name: 'Lifestyle' }
-        ];
-        
-        setProducts(mockProducts);
-        setFilteredProducts(mockProducts);
-        setCategories(mockCategories);
+        // Não usar dados mockados - apenas deixar a lista vazia para mostrar o SVG personalizado
+        setProducts([]);
+        setFilteredProducts([]);
       } finally {
         setIsLoading(false);
       }
