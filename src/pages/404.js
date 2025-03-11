@@ -10,11 +10,11 @@ export default function Custom404() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      router.replace("/auth"); // 🔄 Redireciona automaticamente para a página de login
+      router.replace("/"); // 🔄 Redireciona automaticamente para a página inicial
     }, redirectDelay);
 
     return () => clearTimeout(timeout); // Limpeza do timeout caso o utilizador saia antes
-  }, [router, redirectDelay]);
+  }, [router]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#0D0D0D] text-white p-6 text-center">
@@ -23,13 +23,15 @@ export default function Custom404() {
       <FiAlertTriangle className="text-[#FF8A00] text-6xl animate-bounce mb-4" />
       
       {/* ✅ Mensagem dinâmica de erro 404 */}
-      <h1 className="text-3xl font-bold">{messages.error?.page_not_found}</h1>
+      <h1 className="text-3xl font-bold mb-2">{messages.error?.page_not_found || "Página não encontrada"}</h1>
 
-      <p className="text-gray-400 mt-2">{messages.error?.redirecting_auth}</p>
+      <p className="text-gray-400 mt-2">
+        {messages.error?.redirecting_home || "Redirecionando para a página inicial..."}
+      </p>
 
       {/* ✅ Barra de progresso do redirecionamento */}
       <div className="w-40 mt-4 h-1 bg-[#1A1A1A] rounded-full overflow-hidden">
-        <div className="w-full h-full bg-[#FF8A00] animate-pulse"></div>
+        <div className="w-full h-full bg-[#FF8A00] animate-progress"></div>
       </div>
 
       {/* ✅ Informação sobre o redirecionamento */}
