@@ -29,7 +29,7 @@ export function FAQSection() {
   ];
 
   return (
-    <section className="py-24 px-4 bg-[#0D0D0D]">
+    <section id="faq" className="py-24 px-4 bg-[#0D0D0D]">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <div className="inline-block mb-4 py-2 px-6 bg-[#FF8A00]/10 rounded-full">

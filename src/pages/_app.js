@@ -1,65 +1,45 @@
+import '../styles/globals.css';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ErrorBoundary from '../components/ErrorBoundary';
-import '@/styles/globals.css';
+import Head from 'next/head';
 import '../lib/i18n'; // Importar configuração i18n
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
-
-  // Registrar o Service Worker
-  useEffect(() => {
-    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-      // Registrar o service worker apenas após o carregamento da página
-      window.addEventListener('load', () => {
-        navigator.serviceWorker
-          .register('/sw.js')
-          .then(registration => {
-            console.log('Service Worker registrado com sucesso:', registration.scope);
-          })
-          .catch(error => {
-            console.error('Falha ao registrar Service Worker:', error);
-          });
-      });
-
-      // Adicionar listeners para mudanças de conexão
-      const handleOnlineStatusChange = () => {
-        if (navigator.onLine) {
-          // Se voltarmos a ficar online, tentar atualizar o Service Worker
-          navigator.serviceWorker.ready.then(registration => {
-            registration.update().catch(err => 
-              console.error('Erro ao atualizar Service Worker:', err)
-            );
-          });
-        }
-      };
-
-      window.addEventListener('online', handleOnlineStatusChange);
-      window.addEventListener('offline', () => {
-        console.log('Conexão perdida. Modo offline ativado.');
-      });
-
-      // Limpar event listeners ao desmontar
-      return () => {
-        window.removeEventListener('online', handleOnlineStatusChange);
-        window.removeEventListener('offline', () => {});
-      };
-    }
-  }, []);
-
+  
+  // Isso não é mais necessário, pois cada página agora implementa sua própria lógica de scrolling
+  // Removendo para evitar comportamentos indesejados
+  
   return (
     <ErrorBoundary>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#0D0D0D" />
-        <link rel="manifest" href="/manifest.json" />
+        <meta
+          name="description"
+          content="Diogo Samuel - Personal Trainer e Especialista em Transformação Física. Planos de treino personalizados para resultados reais."
+        />
+        <meta
+          name="keywords"
+          content="personal trainer, treino personalizado, transformação física, emagrecimento, hipertrofia, plano de treino"
+        />
+        <meta property="og:title" content="Diogo Samuel - Personal Trainer" />
+        <meta
+          property="og:description"
+          content="Planos de treino personalizados para transformação física real."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://diogosamuel.pt/" />
+        <meta property="og:image" content="/images/og-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:creator" content="@diogosvmuel" />
+        <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Component {...pageProps} />
-      <ToastContainer />
+      <ToastContainer position="bottom-right" />
     </ErrorBoundary>
   );
 }

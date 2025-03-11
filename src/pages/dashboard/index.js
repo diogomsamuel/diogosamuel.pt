@@ -230,6 +230,22 @@ const DashboardPage = () => {
               </div>
             ) : (
               <div className="bg-gray-50 rounded-lg p-6 text-center">
+                <div className="mb-4 flex justify-center">
+                  <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* Fundo do ícone */}
+                    <circle cx="40" cy="40" r="32" fill="#F3F4F6" />
+                    <circle cx="40" cy="40" r="30" stroke="#E5E7EB" strokeWidth="2" />
+                    
+                    {/* Ícone de régua/medição */}
+                    <rect x="25" y="30" width="30" height="4" rx="1" fill="#FF8A00" fillOpacity="0.7" />
+                    <rect x="25" y="38" width="20" height="4" rx="1" fill="#FF8A00" fillOpacity="0.7" />
+                    <rect x="25" y="46" width="25" height="4" rx="1" fill="#FF8A00" fillOpacity="0.7" />
+                    
+                    {/* Indicação para adicionar */}
+                    <circle cx="55" cy="55" r="10" fill="#F3F4F6" stroke="#E5E7EB" />
+                    <path d="M55 50V60M50 55H60" stroke="#9CA3AF" strokeWidth="2" strokeLinecap="round" />
+                  </svg>
+                </div>
                 <p className="text-gray-500">Nenhuma medida registrada ainda.</p>
                 <Link href="/dashboard/progress" className="mt-2 inline-flex items-center text-blue-600 hover:text-blue-800">
                   Adicionar medidas
@@ -294,6 +310,25 @@ const DashboardPage = () => {
                 </div>
               ) : (
                 <div className="bg-gray-50 rounded-lg p-6 text-center">
+                  <div className="mb-4 flex justify-center">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      {/* Fundo do ícone */}
+                      <circle cx="40" cy="40" r="32" fill="#F3F4F6" />
+                      <circle cx="40" cy="40" r="30" stroke="#E5E7EB" strokeWidth="2" />
+                      
+                      {/* Ícone de alvo/meta */}
+                      <circle cx="40" cy="40" r="25" stroke="#E5E7EB" strokeWidth="2" />
+                      <circle cx="40" cy="40" r="18" stroke="#E5E7EB" strokeWidth="2" />
+                      <circle cx="40" cy="40" r="10" stroke="#E5E7EB" strokeWidth="2" />
+                      <circle cx="40" cy="40" r="5" fill="#FF8A00" fillOpacity="0.7" />
+                      
+                      {/* Setas apontando para o centro */}
+                      <path d="M40 15V25" stroke="#FF8A00" strokeWidth="2" strokeLinecap="round" />
+                      <path d="M40 55V65" stroke="#FF8A00" strokeWidth="2" strokeLinecap="round" />
+                      <path d="M65 40L55 40" stroke="#FF8A00" strokeWidth="2" strokeLinecap="round" />
+                      <path d="M25 40L15 40" stroke="#FF8A00" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
+                  </div>
                   <p className="text-gray-500">Nenhuma meta ativa no momento.</p>
                   <Link href="/dashboard/goals" className="mt-2 inline-flex items-center text-blue-600 hover:text-blue-800">
                     Definir metas

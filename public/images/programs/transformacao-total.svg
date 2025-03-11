@@ -1,0 +1,30 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fundo escuro com gradiente -->
+  <rect width="400" height="300" rx="12" fill="url(#paint0_linear)" />
+  
+  <!-- Decoração - linhas de contorno -->
+  <path d="M50 150 L350 150" stroke="#FF8A00" stroke-opacity="0.3" stroke-width="40" stroke-linecap="round" />
+  <path d="M200 50 L200 250" stroke="#FF8A00" stroke-opacity="0.3" stroke-width="40" stroke-linecap="round" />
+  
+  <!-- Decoração - círculos -->
+  <circle cx="200" cy="150" r="50" fill="#FF8A00" fill-opacity="0.4" />
+  <circle cx="200" cy="150" r="25" fill="#FF8A00" fill-opacity="0.7" />
+  
+  <!-- Silhueta da pessoa "antes e depois" -->
+  <path d="M120 200 Q130 170 140 190 Q145 200 150 190 Q160 170 170 200" stroke="white" stroke-width="3" fill="none" />
+  <path d="M230 200 Q245 160 260 180 Q270 190 280 180 Q295 160 310 200" stroke="white" stroke-width="3" fill="none" />
+  
+  <!-- Setas de transformação -->
+  <path d="M190 150 L210 150 M210 145 L210 155 M190 145 L190 155" stroke="white" stroke-width="3" />
+  
+  <!-- Título -->
+  <text x="200" y="250" fill="white" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">TRANSFORMAÇÃO TOTAL</text>
+  
+  <!-- Definição do gradiente de fundo -->
+  <defs>
+    <linearGradient id="paint0_linear" x1="0" y1="0" x2="400" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1A1A1A" />
+      <stop offset="1" stop-color="#0D0D0D" />
+    </linearGradient>
+  </defs>
+</svg> 

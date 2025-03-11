@@ -66,6 +66,22 @@ const MeasurementsTable = ({ measurements, onDelete, isLoading }) => {
   if (!measurements || measurements.length === 0) {
     return (
       <div className="bg-white rounded-lg shadow p-6 text-center">
+        <div className="mb-4 flex justify-center">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {/* Fundo do ícone */}
+            <circle cx="40" cy="40" r="32" fill="#F3F4F6" />
+            <circle cx="40" cy="40" r="30" stroke="#E5E7EB" strokeWidth="2" />
+            
+            {/* Ícone de tabela vazia */}
+            <rect x="20" y="25" width="40" height="30" rx="2" stroke="#9CA3AF" strokeWidth="2" />
+            <line x1="20" y1="35" x2="60" y2="35" stroke="#9CA3AF" strokeWidth="2" />
+            <line x1="35" y1="25" x2="35" y2="55" stroke="#9CA3AF" strokeWidth="2" />
+            
+            {/* Ícone de medida com detalhe laranja */}
+            <path d="M30 42H25V45H30V42Z" fill="#FF8A00" fillOpacity="0.7" />
+            <path d="M45 42H40V45H45V42Z" fill="#FF8A00" fillOpacity="0.7" />
+          </svg>
+        </div>
         <p className="text-gray-500">Nenhuma medida registrada ainda.</p>
       </div>
     );

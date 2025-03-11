@@ -20,10 +20,35 @@ export default function Products() {
   const [isProcessing, setIsProcessing] = useState(false);
   const router = useRouter();
 
+  // Função para lidar com a navegação por hash quando a página carrega
+  useEffect(() => {
+    // Verificar se há um hash na URL e rolar para a seção correspondente
+    if (router.asPath.includes('#')) {
+      const hash = router.asPath.split('#')[1];
+      const targetElement = document.getElementById(hash);
+      
+      if (targetElement) {
+        // Adicionar um pequeno delay para garantir que todos os elementos foram renderizados
+        setTimeout(() => {
+          // Compensar a altura da navbar fixa
+          const navbarHeight = 80;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }, 500);
+      }
+    }
+  }, [router.asPath, products]); // Adicionar products como dependência para que o scroll funcione após o carregamento dos produtos
+
   useEffect(() => {
     // Fetch products from the API
     const fetchProducts = async () => {
       try {
+        setIsLoading(true);
         const { data } = await axiosInstance.get("/api/plans");
         
         if (data.success) {
@@ -36,7 +61,7 @@ export default function Products() {
               id: plan.id,
               title: plan.name,
               description: plan.description,
-              image: plan.image_url || "/images/placeholder-plan.jpg",
+              image: plan.image_url || "/images/placeholder-blog.svg",
               price: defaultVariant ? `${defaultVariant.price}€` : `${plan.base_price}€`,
               originalPrice: plan.discount_price ? `${plan.base_price}€` : null,
               discount: plan.discount_percentage ? `${plan.discount_percentage}% OFF` : null,
@@ -58,7 +83,83 @@ export default function Products() {
         }
       } catch (error) {
         console.error("Error fetching products:", error);
-        toast.error("Erro ao carregar planos. Por favor, tente novamente mais tarde.");
+        toast.error("Erro ao carregar planos. Usando dados temporários.");
+        
+        // Usar dados mockados temporários para não quebrar a experiência do usuário
+        const mockProducts = [
+          {
+            id: 1,
+            title: 'Plano Hipertrofia',
+            description: 'Plano completo para ganho de massa muscular com treinos 5x por semana.',
+            image: '/images/blog-treino.svg',
+            price: '49.99€',
+            originalPrice: '69.99€',
+            discount: '28% OFF',
+            category: 1,
+            category_name: 'Treino',
+            features: [
+              'Treinos para todos os grupos musculares',
+              'Calendário de 12 semanas',
+              'Vídeos explicativos de cada exercício',
+              'Suporte por 3 meses'
+            ],
+            variants: [],
+            status: 'active',
+            is_active: true
+          },
+          {
+            id: 2,
+            title: 'Plano Nutrição',
+            description: 'Plano nutricional personalizado para maximizar seus ganhos e recuperação.',
+            image: '/images/blog-nutricao.svg',
+            price: '39.99€',
+            originalPrice: '59.99€',
+            discount: '33% OFF', 
+            category: 2,
+            category_name: 'Nutrição',
+            features: [
+              'Cardápio personalizado',
+              'Cálculo de macronutrientes',
+              'Receitas fitness',
+              'Ajustes mensais'
+            ],
+            variants: [],
+            status: 'active',
+            is_active: true
+          },
+          {
+            id: 3,
+            title: 'Plano Completo',
+            description: 'Combinação perfeita de treino e nutrição para resultados máximos.',
+            image: '/images/blog-lifestyle.svg',
+            price: '79.99€',
+            originalPrice: '119.99€',
+            discount: '33% OFF',
+            category: 3,
+            category_name: 'Lifestyle',
+            features: [
+              'Plano de treino completo',
+              'Plano nutricional personalizado',
+              'Suplementação recomendada',
+              'Suporte prioritário',
+              'Consultas mensais online'
+            ],
+            variants: [],
+            status: 'active',
+            is_active: true
+          }
+        ];
+        
+        const mockCategories = [
+          { id: 'all', name: 'Todos' },
+          { id: 1, name: 'Treino' },
+          { id: 2, name: 'Nutrição' },
+          { id: 3, name: 'Lifestyle' }
+        ];
+        
+        setProducts(mockProducts);
+        setFilteredProducts(mockProducts);
+        setCategories(mockCategories);
       } finally {
         setIsLoading(false);
       }
@@ -200,7 +301,21 @@ export default function Products() {
                 transition={{ duration: 0.5 }}
                 className="text-center py-16"
               >
-                <div className="text-gray-400 mb-4 text-5xl">😢</div>
+                <div className="mb-6 flex justify-center">
+                  <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* Fundo escuro circular */}
+                    <circle cx="60" cy="60" r="50" fill="#1A1A1A" />
+                    <circle cx="60" cy="60" r="49" stroke="#303030" strokeWidth="2" />
+                    
+                    {/* Ícone de pesquisa com lupa */}
+                    <circle cx="48" cy="48" r="20" stroke="#FF8A00" strokeWidth="4" strokeOpacity="0.8" />
+                    <line x1="63" y1="63" x2="80" y2="80" stroke="#FF8A00" strokeWidth="6" strokeLinecap="round" strokeOpacity="0.8" />
+                    
+                    {/* X no centro para indicar "não encontrado" */}
+                    <line x1="45" y1="45" x2="51" y2="51" stroke="#555" strokeWidth="3" strokeLinecap="round" />
+                    <line x1="51" y1="45" x2="45" y2="51" stroke="#555" strokeWidth="3" strokeLinecap="round" />
+                  </svg>
+                </div>
                 <h3 className="text-xl font-semibold text-white mb-2">Nenhum plano encontrado</h3>
                 <p className="text-gray-400">Não encontrámos planos para esta categoria. Tente outra opção.</p>
               </motion.div>

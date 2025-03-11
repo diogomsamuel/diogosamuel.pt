@@ -10,7 +10,7 @@ export function FeaturedProgramsSection() {
       price: '€49.99',
       originalPrice: '€79.99',
       discount: '37% DESC',
-      image: '/images/programs/transformacao-total.jpg',
+      image: '/images/programs/transformacao-total.svg',
       features: [
         'Plano de treino detalhado para 12 semanas',
         'Plano nutricional completo com macros calculados',
@@ -26,7 +26,7 @@ export function FeaturedProgramsSection() {
       price: '€39.99',
       originalPrice: '€59.99',
       discount: '33% DESC',
-      image: '/images/programs/pack-iniciante.jpg',
+      image: '/images/programs/pack-iniciante.svg',
       features: [
         'Programa gradual de 8 semanas para iniciantes',
         'Guia nutricional para principiantes',
@@ -38,7 +38,7 @@ export function FeaturedProgramsSection() {
   ];
 
   return (
-    <section className="py-16 px-4 bg-[#0A0A0A]">
+    <section id="featured" className="py-16 px-4 bg-[#0A0A0A]">
       <div className="container mx-auto max-w-6xl">
         <h2 className="text-3xl font-bold text-white mb-8">Planos em Destaque</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
