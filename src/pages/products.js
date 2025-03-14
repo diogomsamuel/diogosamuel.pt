@@ -10,6 +10,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
+import ComingSoon from "../components/common/ComingSoon";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -171,7 +172,7 @@ export default function Products() {
               Planos de Treino
             </h1>
             <p className="text-gray-400 text-center max-w-2xl mx-auto">
-              Escolhe o plano que melhor se adapta aos teus objetivos e nível de experiência. 
+              Escolha o plano que melhor se adapta aos seus objetivos e nível de experiência. 
               Todos os programas incluem suporte personalizado e atualizações gratuitas.
             </p>
           </div>
@@ -250,61 +251,78 @@ export default function Products() {
             )}
 
             {/* Products Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProducts.map((product, index) => (
-                <motion.div
-                  key={product.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-[#1A1A1A]/50 backdrop-blur-sm rounded-xl overflow-hidden border border-[#333] hover:border-[#FF8A00] transition-all group"
-                >
-                  <div className="relative h-48 overflow-hidden">
-                    <Image 
-                      src={product.image} 
-                      alt={product.title}
-                      fill
-                      className="object-cover transform group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] to-transparent opacity-80" />
-                  </div>
-                  <div className="p-6">
-                    <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-xl font-bold text-white group-hover:text-[#FF8A00] transition-colors">{product.title}</h3>
-                      <div className="flex flex-col items-end">
-                        <span className="text-[#FF8A00] font-bold text-2xl">{product.price}</span>
-                        {product.originalPrice && (
-                          <span className="text-gray-500 line-through text-sm">{product.originalPrice}</span>
-                        )}
-                        {product.discount && (
-                          <span className="bg-[#FF8A00]/10 text-[#FF8A00] text-xs font-medium px-2 py-1 rounded">
-                            {product.discount}
-                          </span>
-                        )}
+            {!isLoading && filteredProducts.length > 0 && (
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              >
+                {filteredProducts.map((product) => (
+                  <motion.div
+                    key={product.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="bg-[#1A1A1A]/50 backdrop-blur-sm rounded-xl overflow-hidden border border-[#333] hover:border-[#FF8A00] transition-all duration-300"
+                  >
+                    <div className="relative h-48">
+                      <Image
+                        src={product.image}
+                        alt={product.title}
+                        layout="fill"
+                        objectFit="cover"
+                        className="transition-transform duration-300 hover:scale-105"
+                      />
+                      {product.discount && (
+                        <div className="absolute top-4 right-4 bg-[#FF8A00] text-white px-3 py-1 rounded-full text-sm font-medium">
+                          {product.discount}
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold text-white mb-2">{product.title}</h3>
+                      <p className="text-gray-400 mb-4">{product.description}</p>
+                      <div className="flex items-center justify-between mb-6">
+                        <div>
+                          <span className="text-2xl font-bold text-white">{product.price}</span>
+                          {product.originalPrice && (
+                            <span className="text-gray-400 line-through ml-2">{product.originalPrice}</span>
+                          )}
+                        </div>
+                        <button
+                          onClick={() => handlePurchase(product.id)}
+                          disabled={isProcessing}
+                          className="px-6 py-2 bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] text-white rounded-full font-medium hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          {isProcessing ? 'A processar...' : 'Comprar Agora'}
+                        </button>
+                      </div>
+                      <div className="space-y-2">
+                        {product.features.map((feature, index) => (
+                          <div key={index} className="flex items-center text-gray-300">
+                            <svg className="w-5 h-5 text-[#FF8A00] mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            {feature}
+                          </div>
+                        ))}
                       </div>
                     </div>
-                    <p className="text-gray-400 mb-6">{product.description}</p>
-                    <ul className="space-y-3 mb-6">
-                      {product.features.map((feature, index) => (
-                        <li key={index} className="flex items-center text-gray-300">
-                          <svg className="w-5 h-5 text-[#FF8A00] mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                          </svg>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                    <button 
-                      onClick={() => handlePurchase(product.id)}
-                      disabled={isProcessing}
-                      className="w-full bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] text-white font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed transform group-hover:scale-105 duration-300"
-                    >
-                      {isProcessing ? 'Processando...' : 'Comprar Agora'}
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+          </div>
+        </section>
+
+        {/* Coming Soon Section */}
+        <section className="py-16 px-4 relative z-10">
+          <div className="container mx-auto max-w-6xl">
+            <ComingSoon 
+              title="Novos Planos em Breve"
+              message="Estamos a preparar novos planos de treino personalizados. Fique atento às novidades!"
+            />
           </div>
         </section>
 

@@ -5,13 +5,14 @@ import Image from 'next/image';
 import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
 import { motion } from "framer-motion";
+import ComingSoon from "../components/common/ComingSoon";
 
 // Dados fictícios para o blog
 const BLOG_POSTS = [
   {
     id: 1,
     title: "A importância do treino de força para a saúde geral",
-    excerpt: "Descubra porque o treino de força é essencial para a sua saúde a longo prazo e como começar hoje mesmo.",
+    excerpt: "Descubra por que o treino de força é essencial para a sua saúde a longo prazo e como começar hoje mesmo.",
     imageUrl: "/images/blog-treino.svg",
     category: "Treino",
     date: "12 Mar 2024",
@@ -20,7 +21,7 @@ const BLOG_POSTS = [
   {
     id: 2,
     title: "Nutrição para ganho de massa muscular",
-    excerpt: "Aprenda quais alimentos devem fazer parte da sua dieta para maximizar seus ganhos no ginásio.",
+    excerpt: "Aprenda quais alimentos devem fazer parte da sua dieta para maximizar os seus ganhos no ginásio.",
     imageUrl: "/images/blog-nutricao.svg",
     category: "Nutrição",
     date: "5 Mar 2024",
@@ -47,7 +48,7 @@ const BLOG_POSTS = [
   {
     id: 5,
     title: "Guia completo para iniciantes em musculação",
-    excerpt: "Tudo o que você precisa saber para começar a treinar com pesos de forma segura e eficiente.",
+    excerpt: "Tudo o que precisa saber para começar a treinar com pesos de forma segura e eficiente.",
     imageUrl: "/images/blog-treino.svg",
     category: "Treino",
     date: "15 Fev 2024",
@@ -56,7 +57,7 @@ const BLOG_POSTS = [
   {
     id: 6,
     title: "Recuperação muscular: estratégias que realmente funcionam",
-    excerpt: "Técnicas comprovadas para acelerar a recuperação e melhorar seus resultados.",
+    excerpt: "Técnicas comprovadas para acelerar a recuperação e melhorar os seus resultados.",
     imageUrl: "/images/blog-recuperacao.svg",
     category: "Recuperação",
     date: "8 Fev 2024",
@@ -105,7 +106,7 @@ export default function Blog() {
     <>
       <Head>
         <title>Blog | Diogo Samuel</title>
-        <meta name="description" content="Artigos, dicas e conhecimento sobre fitness, nutrição e lifestyle para te ajudar a alcançar os teus objetivos." />
+        <meta name="description" content="Artigos, dicas e conhecimento sobre fitness, nutrição e lifestyle para te ajudar a alcançar os seus objetivos." />
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
@@ -128,8 +129,8 @@ export default function Blog() {
               Blog
             </h1>
             <p className="text-gray-400 text-center max-w-2xl mx-auto">
-              Dicas, artigos e conhecimento para te ajudar a alcançar teus objetivos fitness e de saúde,
-              enquanto equilibras a vida digital com o bem-estar físico.
+              Dicas, artigos e conhecimento para te ajudar a alcançar os seus objetivos fitness e de saúde,
+              enquanto equilibra a vida digital com o bem-estar físico.
             </p>
           </div>
         </motion.section>
@@ -240,40 +241,15 @@ export default function Blog() {
           </div>
         </section>
 
-        {/* Newsletter CTA */}
-        <motion.section 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="py-16 px-4 relative z-10"
-        >
-          <div className="container mx-auto max-w-4xl">
-            <div className="bg-gradient-to-r from-[#1A1A1A] to-[#252525] rounded-2xl p-8 md:p-12 border border-[#333] relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-tl from-[#FF8A00]/20 to-transparent opacity-40" />
-              <div className="relative z-10">
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                  Receba as últimas novidades e dicas
-                </h2>
-                <p className="text-gray-400 mb-8 max-w-xl">
-                  Subscreve a nossa newsletter para receberes artigos, dicas e promoções exclusivas diretamente no teu email.
-                </p>
-                <form className="flex flex-col sm:flex-row gap-4 max-w-xl">
-                  <input
-                    type="email"
-                    placeholder="Seu email"
-                    className="flex-grow bg-[#0D0D0D]/70 border border-[#333] rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#FF8A00] focus:border-transparent"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] hover:opacity-90 text-white px-6 py-3 rounded-lg font-medium transition-all uppercase tracking-wider shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30"
-                  >
-                    Subscrever
-                  </button>
-                </form>
-              </div>
-            </div>
+        {/* Coming Soon Section */}
+        <section className="py-16 px-4 relative z-10">
+          <div className="container mx-auto max-w-6xl">
+            <ComingSoon 
+              title="Novos Artigos em Breve"
+              message="Estamos a preparar mais conteúdo interessante para o blog. Fique atento às novidades!"
+            />
           </div>
-        </motion.section>
+        </section>
 
         <Footer />
       </main>
