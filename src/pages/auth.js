@@ -28,19 +28,24 @@ export default function Auth() {
 
     async function checkDBStatus() {
       try {
+        console.log('[AUTH] Verificando status do banco de dados...');
         const { data, status } = await axiosInstance.get("/api/db-status", {
           timeout: 5000,
           validateStatus: () => true,
         });
 
-        if (status === 200 && data.status === "online") {
+        console.log('[AUTH] Resposta do status:', data);
+
+        if (status === 200 && data.status === "connected") {
           setDbStatus("online");
           setServerError(false);
         } else {
+          console.error('[AUTH] Banco de dados offline:', data.error);
           setDbStatus("offline");
           setServerError(false);
         }
-      } catch {
+      } catch (error) {
+        console.error('[AUTH] Erro ao verificar status:', error);
         setServerError(true);
         setDbStatus(null);
       } finally {
