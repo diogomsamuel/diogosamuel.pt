@@ -33,6 +33,7 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error) => {
+    console.error('[AXIOS] Erro na requisição:', error);
     return Promise.reject(error);
   }
 );
@@ -41,11 +42,26 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
+    console.error('[AXIOS] Erro na resposta:', {
+      status: error.response?.status,
+      data: error.response?.data,
+      config: {
+        url: error.config?.url,
+        method: error.config?.method
+      }
+    });
+
     if (error.response?.status === 401) {
       // Limpar o token e redirecionar para a página de login
       document.cookie = "token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT; Secure; SameSite=Strict";
       window.location.href = '/auth';
     }
+
+    // Tratar erros específicos
+    if (error.response?.status === 500) {
+      console.error('[AXIOS] Erro do servidor:', error.response.data);
+    }
+
     return Promise.reject(error);
   }
 );
