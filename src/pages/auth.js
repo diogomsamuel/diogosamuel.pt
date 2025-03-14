@@ -88,7 +88,7 @@ export default function Auth() {
       // Não precisamos fazer nada adicional aqui
 
       toast.success(messages.auth?.login_success);
-      setTimeout(() => router.push("/welcome"), 1000);
+      setTimeout(() => router.push("/dashboard"), 1000);
     } catch (error) {
       console.error('[AUTH] Erro no login:', error);
       let errorMessage = messages.auth?.login_error;
