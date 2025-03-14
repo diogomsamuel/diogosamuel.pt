@@ -2,7 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FiHome, FiUser, FiBarChart2, FiTarget, FiBook, FiSettings, FiLogOut, FiMenu, FiX } from 'react-icons/fi';
+import { 
+  FiHome, 
+  FiUser, 
+  FiBarChart2, 
+  FiTarget, 
+  FiBook, 
+  FiSettings, 
+  FiLogOut, 
+  FiMenu, 
+  FiX, 
+  FiBell,
+  FiActivity,
+  FiFileText,
+  FiLink,
+  FiCreditCard,
+  FiPackage,
+  FiHelpCircle
+} from 'react-icons/fi';
 
 const DashboardLayout = ({ children }) => {
   const router = useRouter();
@@ -52,30 +69,37 @@ const DashboardLayout = ({ children }) => {
     { name: 'Dashboard', path: '/dashboard', icon: <FiHome className="w-5 h-5" /> },
     { name: 'Perfil', path: '/dashboard/profile', icon: <FiUser className="w-5 h-5" /> },
     { name: 'Progresso', path: '/dashboard/progress', icon: <FiBarChart2 className="w-5 h-5" /> },
+    { name: 'Atividades', path: '/dashboard/activities', icon: <FiActivity className="w-5 h-5" /> },
     { name: 'Metas', path: '/dashboard/goals', icon: <FiTarget className="w-5 h-5" /> },
     { name: 'Materiais', path: '/dashboard/materials', icon: <FiBook className="w-5 h-5" /> },
+    { name: 'Relatórios', path: '/dashboard/reports', icon: <FiFileText className="w-5 h-5" /> },
+    { name: 'Integrações', path: '/dashboard/integrations', icon: <FiLink className="w-5 h-5" /> },
+    { name: 'Notificações', path: '/dashboard/notifications', icon: <FiBell className="w-5 h-5" /> },
+    { name: 'Pagamentos', path: '/dashboard/payments', icon: <FiCreditCard className="w-5 h-5" /> },
+    { name: 'Assinaturas', path: '/dashboard/subscriptions', icon: <FiPackage className="w-5 h-5" /> },
+    { name: 'Ajuda', path: '/dashboard/help', icon: <FiHelpCircle className="w-5 h-5" /> },
     { name: 'Configurações', path: '/dashboard/settings', icon: <FiSettings className="w-5 h-5" /> },
   ];
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+      <div className="flex items-center justify-center min-h-screen bg-[#0A0A0A]">
+        <div className="w-16 h-16 border-4 border-[#FF8A00] border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-[#0A0A0A]">
       {/* Mobile menu button */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white shadow-md p-4 flex justify-between items-center">
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-[#1A1A1A] shadow-md p-4 flex justify-between items-center">
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="text-gray-600 hover:text-blue-500 focus:outline-none"
+          className="text-gray-400 hover:text-[#FF8A00] focus:outline-none"
         >
           {sidebarOpen ? <FiX className="w-6 h-6" /> : <FiMenu className="w-6 h-6" />}
         </button>
-        <div className="text-gray-800 font-semibold">
+        <div className="text-white font-semibold">
           Olá, {userName}
         </div>
       </div>
@@ -92,7 +116,7 @@ const DashboardLayout = ({ children }) => {
       <aside 
         className={`fixed top-0 left-0 z-40 h-screen transition-transform ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } lg:translate-x-0 lg:w-64 bg-white shadow-xl`}
+        } lg:translate-x-0 lg:w-64 bg-[#1A1A1A] shadow-xl`}
       >
         <div className="h-full px-3 py-4 overflow-y-auto">
           <div className="flex items-center justify-center mb-8 mt-4">
@@ -112,22 +136,22 @@ const DashboardLayout = ({ children }) => {
           </div>
           
           <div className="text-center mb-8">
-            <div className="inline-block rounded-full bg-blue-100 p-3 mb-2">
-              <FiUser className="w-6 h-6 text-blue-600" />
+            <div className="inline-block rounded-full bg-[#FF8A00]/10 p-3 mb-2">
+              <FiUser className="w-6 h-6 text-[#FF8A00]" />
             </div>
-            <h3 className="text-gray-800 font-semibold">Olá, {userName}</h3>
-            <p className="text-gray-500 text-sm">Bem-vindo ao seu dashboard</p>
+            <h3 className="text-white font-semibold">Olá, {userName}</h3>
+            <p className="text-gray-400 text-sm">Bem-vindo ao seu dashboard</p>
           </div>
           
-          <hr className="my-4" />
+          <hr className="my-4 border-[#333]" />
           
-          <ul className="space-y-2">
+          <ul className="space-y-2 max-h-[calc(100vh-220px)] overflow-y-auto">
             {menuItems.map((item) => (
               <li key={item.path}>
                 <Link 
                   href={item.path}
-                  className={`flex items-center p-3 text-base font-normal rounded-lg hover:bg-gray-100 ${
-                    router.pathname === item.path ? 'bg-blue-50 text-blue-700' : 'text-gray-700'
+                  className={`flex items-center p-3 text-base font-normal rounded-lg hover:bg-[#333] ${
+                    router.pathname === item.path ? 'bg-[#FF8A00]/10 text-[#FF8A00]' : 'text-gray-300'
                   }`}
                   onClick={() => setSidebarOpen(false)}
                 >
@@ -139,7 +163,7 @@ const DashboardLayout = ({ children }) => {
             <li>
               <button
                 onClick={handleLogout}
-                className="flex items-center w-full p-3 text-base font-normal text-red-600 rounded-lg hover:bg-red-50"
+                className="flex items-center w-full p-3 text-base font-normal text-red-400 rounded-lg hover:bg-red-900/20"
               >
                 <FiLogOut className="w-5 h-5" />
                 <span className="ml-3">Sair</span>
@@ -151,7 +175,7 @@ const DashboardLayout = ({ children }) => {
 
       {/* Content */}
       <div className={`p-4 lg:ml-64 ${sidebarOpen ? 'lg:ml-64' : ''} pt-16 lg:pt-4`}>
-        <div className="p-4 rounded-lg bg-white shadow min-h-[calc(100vh-2rem)]">
+        <div className="p-4 rounded-lg bg-[#0A0A0A] shadow min-h-[calc(100vh-2rem)]">
           {children}
         </div>
       </div>
