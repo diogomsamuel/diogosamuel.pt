@@ -76,21 +76,39 @@ export default function Auth() {
     }
 
     try {
+      console.log('[AUTH] Tentando fazer login...');
       const { data } = await axiosInstance.post("/api/loginDB", {
         username: formData.email,
         password: formData.password,
       });
 
+      console.log('[AUTH] Login bem-sucedido:', data);
+
+      // O token já está sendo definido como cookie pelo backend
+      // Não precisamos fazer nada adicional aqui
+
       toast.success(messages.auth?.login_success);
       setTimeout(() => router.push("/welcome"), 1000);
     } catch (error) {
+      console.error('[AUTH] Erro no login:', error);
       let errorMessage = messages.auth?.login_error;
+      
       if (error.response) {
-        if (error.response.status === 404) errorMessage = messages.auth?.user_not_found;
-        else if (error.response.status === 500) errorMessage = messages.server?.server_offline;
+        console.error('[AUTH] Resposta do erro:', error.response.data);
+        
+        if (error.response.status === 404) {
+          errorMessage = messages.auth?.user_not_found;
+        } else if (error.response.status === 500) {
+          errorMessage = messages.server?.server_offline;
+        } else if (error.response.status === 401) {
+          errorMessage = messages.auth?.invalid_credentials;
+        } else if (error.response.status === 403) {
+          errorMessage = messages.auth?.account_disabled;
+        }
       } else if (error.message.includes("Network Error")) {
         errorMessage = messages.server?.server_offline;
       }
+      
       toast.error(errorMessage);
     }
   };
