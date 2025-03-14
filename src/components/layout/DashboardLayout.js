@@ -14,7 +14,7 @@ const DashboardLayout = ({ children }) => {
     // Verificar se o usuário está autenticado
     const checkAuth = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/session`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_APIS_URL_REMOTE}/api/session`, {
           method: 'GET',
           credentials: 'include',
         });
@@ -38,7 +38,7 @@ const DashboardLayout = ({ children }) => {
 
   const handleLogout = async () => {
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/logout`, {
+      await fetch(`${process.env.NEXT_PUBLIC_APIS_URL_REMOTE}/api/logout`, {
         method: 'POST',
         credentials: 'include',
       });

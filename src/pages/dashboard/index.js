@@ -29,19 +29,19 @@ const DashboardPage = () => {
       setIsLoading(true);
       try {
         // Carregar dados do usuário
-        const userResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/profile`, {
+        const userResponse = await fetch(`${process.env.NEXT_PUBLIC_APIS_URL_REMOTE}/api/profile`, {
           method: 'GET',
           credentials: 'include',
         });
 
         // Carregar medidas recentes
-        const measurementsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/progress/measurements`, {
+        const measurementsResponse = await fetch(`${process.env.NEXT_PUBLIC_APIS_URL_REMOTE}/api/progress/measurements`, {
           method: 'GET',
           credentials: 'include',
         });
 
         // Carregar metas
-        const goalsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/progress/goals`, {
+        const goalsResponse = await fetch(`${process.env.NEXT_PUBLIC_APIS_URL_REMOTE}/api/progress/goals`, {
           method: 'GET',
           credentials: 'include',
         });
@@ -63,7 +63,7 @@ const DashboardPage = () => {
 
         // Carregar materiais se possível
         try {
-          const materialsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/materials/access`, {
+          const materialsResponse = await fetch(`${process.env.NEXT_PUBLIC_APIS_URL_REMOTE}/api/materials/access`, {
             method: 'GET',
             credentials: 'include',
           });

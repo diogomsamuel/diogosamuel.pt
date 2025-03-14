@@ -39,7 +39,7 @@ const ProgressPage = () => {
     const fetchMeasurements = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/progress/measurements`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_APIS_URL_REMOTE}/api/progress/measurements`, {
           method: 'GET',
           credentials: 'include',
         });
@@ -67,7 +67,7 @@ const ProgressPage = () => {
   const handleAddMeasurement = async (measurementData) => {
     try {
       setIsSubmitting(true);
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/progress/measurements`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_APIS_URL_REMOTE}/api/progress/measurements`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -98,7 +98,8 @@ const ProgressPage = () => {
     }
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/progress/measurements?id=${id}`, {
+      setIsDeleting(true);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_APIS_URL_REMOTE}/api/progress/measurements?id=${id}`, {
         method: 'DELETE',
         credentials: 'include',
       });
