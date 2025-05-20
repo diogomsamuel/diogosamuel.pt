@@ -1,68 +1,75 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-export function AboutSection({ socialLinks }) {
+export const AboutSection = ({ socialLinks }) => {
   return (
-    <section id="about" className="py-24 px-4 bg-[#0D0D0D]">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-        <motion.div
-          initial={{ x: -50, opacity: 0 }}
-          whileInView={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="space-y-8"
-        >
-          <div className="inline-block mb-4 py-2 px-6 bg-gradient-to-r from-[#FF8A00]/10 to-[#FF5F00]/10 rounded-full">
-            <p className="text-[#FF8A00] font-bold uppercase tracking-wider">A Minha Jornada</p>
-          </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-wide leading-tight">
-            A Transformar o Meu <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF8A00] to-[#FF5F00]">Corpo e Conhecimento</span>
-          </h2>
-          <div className="text-gray-300 space-y-6 text-lg text-justify">
-            <p>
-              Chamo-me Diogo Samuel. De um miúdo magro a <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] font-semibold">&apos;falso magro&apos;</span> em 2020, decidi estudar e treinar a sério. Mesmo com altos e baixos, provei que é possível ter resultados reais sem vida perfeita.
-            </p>
-            <p>
-              O maior plot twist? Perdi-me entre <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] font-semibold">negócios, trabalho e estudos</span>. Ganhei <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] font-semibold">15 Kg</span>, mas agora?  É hora de mostrar que dá para conciliar tudo sem desculpas, sem atalhos.
-            </p>
-            <p>
-              Este é o meu comeback: <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8A00] to-[#FF5F00] font-semibold">100% real - 0% filtros</span>. Uma transformação do zero com treinos brutais e desafios reais. Cada vitória e cada derrota, tudo exposto.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-4 items-center mt-6">
-            {socialLinks.map((social) => (
-              <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-2 py-2 px-4 ${social.color} rounded-lg hover:bg-[#FF8A00]/20 transition-colors`}>
-                <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox={social.name === 'Twitter' ? '0 0 512 512' : '0 0 576 512'} fill="currentColor">
-                  <path d={social.icon} />
-                </svg>
-                <span className="font-bold text-sm">{social.name.toUpperCase()}</span>
-              </a>
-            ))}
-          </div>
-        </motion.div>
-        <motion.div
-          initial={{ x: 50, opacity: 0 }}
-          whileInView={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="relative"
-        >
-          <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl shadow-[#FF8A00]/10">
-            <div className="absolute -inset-1 bg-gradient-to-br from-[#FF8A00] to-[#FF5F00] opacity-20 blur-2xl"></div>
-            <div className="absolute inset-0 rounded-2xl border border-[#FF8A00]/10"></div>
-            <div className="relative w-full h-full overflow-hidden rounded-2xl">
+    <section className="py-20 bg-background-dark-lighter">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Image */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative"
+          >
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
               <Image
-                src="/images/profile.jpeg"
-                alt="Diogo Samuel - Personal Trainer"
-                layout="fill"
-                objectFit="cover"
-                quality={100}
-                className="hover:scale-105 transition-transform duration-700"
+                src="/images/about-image.jpg"
+                alt="About Diogo Samuel"
+                fill
+                className="object-cover"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-background-dark to-transparent opacity-40" />
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+
+          {/* Content */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center lg:text-left"
+          >
+            <h2 className="text-4xl font-bold text-foreground mb-6">About Me</h2>
+            <p className="text-text-muted mb-8">
+              I'm a fitness enthusiast, barber, and content creator passionate about sharing my journey 
+              and inspiring others. Through my social media platforms, I document my fitness progress, 
+              lifestyle choices, and personal growth.
+            </p>
+            <p className="text-text-muted mb-8">
+              My content focuses on fitness, lifestyle, and the balance between work and personal life. 
+              I believe in authenticity and sharing both the successes and challenges of the journey.
+            </p>
+
+            {/* Social Links */}
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+              {socialLinks.map((link) => (
+                <motion.a
+                  key={link.name}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`p-3 rounded-full bg-background hover:bg-background-dark transition-colors ${link.color}`}
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d={link.icon} />
+                  </svg>
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
-} 
+}; 

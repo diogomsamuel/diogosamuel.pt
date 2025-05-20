@@ -1,64 +1,17 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
 import { HeroSection } from "../components/sections/HeroSection";
 import { AboutSection } from "../components/sections/AboutSection";
-import { YouTubeSection } from "../components/sections/YouTubeSection";
-import { FeaturedProgramsSection } from "../components/sections/FeaturedProgramsSection";
-import { WhyBuySection } from "../components/sections/WhyBuySection";
-import { InstitutoSection } from "../components/sections/InstitutoSection";
-import { FAQSection } from "../components/sections/FAQSection";
+import { SocialSection } from "../components/sections/SocialSection";
 import { CTASection } from "../components/sections/CTASection";
-import { useRouter } from "next/router";
 
-// Função Home - Landing Page
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const router = useRouter();
 
-  // Função para lidar com a navegação por hash quando a página carrega
-  useEffect(() => {
-    // Verificar se há um hash na URL e rolar para a seção correspondente
-    if (router.asPath.includes('#')) {
-      const hash = router.asPath.split('#')[1];
-      const scrollToSection = () => {
-        const targetElement = document.getElementById(hash);
-        
-        if (targetElement) {
-          // Compensar a altura da navbar fixa
-          const navbarHeight = 80;
-          const elementPosition = targetElement.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-          return true;
-        }
-        return false;
-      };
-
-      // Tentar rolar com um pequeno delay para garantir que os elementos foram renderizados
-      setTimeout(() => {
-        // Se não conseguir encontrar na primeira tentativa, tentar algumas vezes mais
-        let attempts = 0;
-        const maxAttempts = 5;
-        const interval = setInterval(() => {
-          if (scrollToSection() || attempts >= maxAttempts) {
-            clearInterval(interval);
-          }
-          attempts++;
-        }, 200);
-      }, 300);
-    }
-  }, [router.asPath]);
-
-  // Definição dos links sociais
+  // Social links
   const socialLinks = [
     {
       name: "Instagram",
@@ -80,165 +33,41 @@ export default function Home() {
     }
   ];
 
-  // Definição das categorias de produtos
-  const categories = [
-    { id: 'all', name: 'Todos os Planos' },
-    { id: 'gym', name: 'Ginásio' },
-    { id: 'home', name: 'Em Casa' },
-    { id: 'nutrition', name: 'Nutrição' }
-  ];
-
-  // Definição dos produtos
-  const products = [
-    {
-      id: 1,
-      title: 'Plano Básico de Hipertrofia',
-      description: 'Perfeito para iniciantes que querem ganhar massa muscular. Foco nos principais grupos musculares com treinos 3x por semana.',
-      price: '€19.99',
-      originalPrice: '€29.99',
-      discount: '33% DESC',
-      category: 'gym'
-    },
-    {
-      id: 2,
-      title: 'Plano Intermediário 5x',
-      description: 'Para praticantes com experiência. Divisão de treino em 5 dias focando em grupos musculares específicos.',
-      price: '€29.99',
-      originalPrice: '€39.99',
-      discount: '25% DESC',
-      category: 'gym'
-    },
-    {
-      id: 3,
-      title: 'Plano Avançado PPL',
-      description: 'Programa Push/Pull/Legs para maximizar os ganhos musculares. Recomendado para praticantes avançados.',
-      price: '€39.99',
-      originalPrice: '€49.99',
-      discount: '20% DESC',
-      category: 'gym'
-    },
-    {
-      id: 4,
-      title: 'Treino em Casa - Básico',
-      description: 'Treinos eficientes sem equipamento. Ideal para quem não tem acesso a ginásio.',
-      price: '€14.99',
-      originalPrice: '€24.99',
-      discount: '40% DESC',
-      category: 'home'
-    },
-    {
-      id: 5,
-      title: 'Treino em Casa - Completo',
-      description: 'Programa completo usando apenas peso corporal e equipamentos básicos em casa.',
-      price: '€24.99',
-      originalPrice: '€34.99',
-      discount: '28% DESC',
-      category: 'home'
-    },
-    {
-      id: 6,
-      title: 'Plano Nutricional Hipertrofia',
-      description: 'Plano de alimentação focado em ganho de massa muscular, com opções para diferentes preferências alimentares.',
-      price: '€34.99',
-      originalPrice: '€44.99',
-      discount: '22% DESC',
-      category: 'nutrition'
-    }
-  ];
-
-  // Definição dos produtos em destaque
-  const featuredProducts = [
-    {
-      id: 101,
-      title: 'Transformação Total',
-      description: 'Um programa de 12 semanas para transformação física completa, combinando treino e plano alimentar coordenados.',
-      price: '€49.99',
-      originalPrice: '€79.99',
-      discount: '37% DESC',
-      features: [
-        'Plano de treino detalhado para 12 semanas',
-        'Plano nutricional completo com macros calculados',
-        'Acompanhamento de progresso semanal',
-        'Vídeos explicativos de todos os exercícios',
-        'Suporte via e-mail por 3 meses'
-      ]
-    },
-    {
-      id: 102,
-      title: 'Pack Iniciante Completo',
-      description: 'Tudo o que precisas para começar a tua jornada fitness com o pé direito, mesmo sem experiência prévia.',
-      price: '€39.99',
-      originalPrice: '€59.99',
-      discount: '33% DESC',
-      features: [
-        'Programa gradual de 8 semanas para iniciantes',
-        'Guia nutricional para principiantes',
-        'Técnicas de execução passo a passo',
-        'Plano de progressão de cargas',
-        'Calendário de treinos personalizável'
-      ]
-    }
-  ];
-
-  // Função para tratar a mudança de categoria
-  const handleCategoryChange = (categoryId) => {
-    setSelectedCategory(categoryId);
-  };
-
-  // Função para tratar a seleção de produto
-  const handleProductSelect = (productId) => {
-    // Por enquanto só um console.log - no futuro pode abrir um modal ou redirecionar
-    console.log(`Produto selecionado: ${productId}`);
-  };
-
   useEffect(() => {
-    // Simulação de carregamento do site
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
-
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <>
       <Head>
-        <title>Diogo Samuel | Code, Lift, Repeat</title>
-        <meta name="description" content="Documentando a minha jornada fitness desde o início. Vamos crescer e evoluir juntos." />
+        <title>Diogo Samuel | Lifestyle & Fitness</title>
+        <meta name="description" content="Follow my journey through fitness, lifestyle, and personal growth. Let's grow together." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
 
       {isLoading ? (
-        // Tela de loading
-        <div className="fixed inset-0 flex items-center justify-center bg-[#0D0D0D] z-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-background z-50">
           <div className="flex flex-col items-center">
-            <div className="w-16 h-16 border-4 border-t-[#FF8A00] border-b-[#FF5F00] border-l-transparent border-r-transparent rounded-full animate-spin mb-4"></div>
-            <h2 className="text-2xl font-bold text-white">A carregar...</h2>
+            <div className="w-16 h-16 border-4 border-t-brand-primary border-b-brand-secondary border-l-transparent border-r-transparent rounded-full animate-spin mb-4"></div>
+            <h2 className="text-2xl font-bold text-foreground">Loading...</h2>
           </div>
         </div>
       ) : (
-        // Conteúdo principal
-        <main className="bg-[#0D0D0D] min-h-screen">
-          {/* Navbar */}
+        <main className="bg-background min-h-screen">
           <Navbar />
           
-          {/* Seções */}
           <div className="pt-16">
             <HeroSection />
             <AboutSection socialLinks={socialLinks} />
-            <YouTubeSection />
-            <FeaturedProgramsSection 
-              products={featuredProducts}
-              onProductSelect={handleProductSelect}
-            />
-            <WhyBuySection />
-            <InstitutoSection />
-            <FAQSection />
+            <SocialSection />
             <CTASection />
           </div>
           
-          {/* Footer */}
           <Footer />
         </main>
       )}
