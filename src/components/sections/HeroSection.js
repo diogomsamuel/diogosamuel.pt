@@ -57,7 +57,7 @@ export const HeroSection = () => {
           >
             <div className="relative aspect-square rounded-2xl overflow-hidden">
               <Image
-                src="/images/hero-image.jpg"
+                src="/images/profile.jpeg"
                 alt="Diogo Samuel"
                 fill
                 className="object-cover"

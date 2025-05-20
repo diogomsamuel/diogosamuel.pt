@@ -16,7 +16,7 @@ export const AboutSection = () => {
           >
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
               <Image
-                src="/images/about-image.jpg"
+                src="/images/hero-bg.jpg"
                 alt="About Diogo Samuel"
                 fill
                 className="object-cover"

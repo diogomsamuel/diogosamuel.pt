@@ -7,14 +7,14 @@ export const SocialSection = () => {
       platform: 'Instagram',
       title: 'Lifestyle & Fitness',
       description: 'Follow my daily journey through fitness, lifestyle, and personal growth.',
-      image: '/images/instagram-preview.jpg',
+      image: '/images/blog-lifestyle.svg',
       link: 'https://instagram.com/diogosvmuel'
     },
     {
       platform: 'YouTube',
       title: 'Fitness & Motivation',
       description: 'Watch my fitness journey, workouts, and lifestyle content.',
-      image: '/images/youtube-preview.jpg',
+      image: '/images/blog-treino.svg',
       link: 'https://youtube.com/@diogosvmuel'
     }
   ];

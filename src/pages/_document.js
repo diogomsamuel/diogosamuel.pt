@@ -18,7 +18,7 @@ export default function Document() {
           rel="stylesheet"
         />
       </Head>
-      <body className="bg-gray-900 text-white antialiased">
+      <body className="bg-background text-foreground antialiased">
         <Main />
         <NextScript />
       </body>
