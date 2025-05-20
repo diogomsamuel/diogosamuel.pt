@@ -22,7 +22,7 @@ export const HeroSection = () => {
             </h1>
             <p className="text-lg md:text-xl text-text-muted mb-8 max-w-xl mx-auto lg:mx-0">
               Follow my journey through fitness, lifestyle, and personal growth. 
-              Let's inspire and grow together.
+              Let&apos;s inspire and grow together.
             </p>
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
               <motion.a

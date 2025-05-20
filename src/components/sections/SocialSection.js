@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export const SocialSection = () => {
   const socialContent = [
@@ -47,11 +48,12 @@ export const SocialSection = () => {
               transition={{ duration: 0.6, delay: index * 0.2 }}
               className="group relative overflow-hidden rounded-2xl bg-background-dark-lighter"
             >
-              <div className="aspect-w-16 aspect-h-9">
-                <img
+              <div className="aspect-w-16 aspect-h-9 relative">
+                <Image
                   src={content.image}
                   alt={content.title}
-                  className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
+                  fill
+                  className="object-cover transform group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-background-dark to-transparent opacity-80" />
