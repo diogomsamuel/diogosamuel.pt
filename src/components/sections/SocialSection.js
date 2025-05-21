@@ -1,96 +1,53 @@
-import { motion } from 'framer-motion';
-import Image from 'next/image';
+import Image from 'next/image'
+import Link from 'next/link'
 
 export const SocialSection = () => {
-  const socialContent = [
-    {
-      platform: 'Instagram',
-      title: 'Lifestyle & Fitness',
-      description: 'Siga minha jornada diária através do fitness, lifestyle e crescimento pessoal.',
-      image: '/images/blog-lifestyle.svg',
-      link: 'https://instagram.com/diogosvmuel',
-      color: '#E4405F'
-    },
-    {
-      platform: 'YouTube',
-      title: 'Fitness & Motivação',
-      description: 'Assista minha jornada fitness, treinos e conteúdo de lifestyle.',
-      image: '/images/blog-treino.svg',
-      link: 'https://youtube.com/@diogosvmuel',
-      color: '#FF0000'
-    }
+  // Primeira imagem é a grande, as outras 6 são menores
+  const images = [
+    '/images/insta1.jpg', // imagem grande
+    '/images/insta2.jpg',
+    '/images/insta3.jpg',
+    '/images/insta4.jpg',
+    '/images/insta5.jpg',
+    '/images/insta6.jpg',
+    '/images/insta7.jpg',
   ];
 
   return (
-    <section className="relative py-32 overflow-hidden">
-      {/* Background with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background-dark-lighter to-background" />
-      
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent" />
-      <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
-      <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
-
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
-          <h2 className="text-5xl font-bold text-foreground mb-6">
-            Follow My Journey
-            <span className="block text-accent mt-2 text-3xl">Join Me on Social Media</span>
-          </h2>
-          <p className="text-xl text-text-muted max-w-2xl mx-auto leading-relaxed">
-            Junte-se a mim nas redes sociais para inspiração diária, dicas de fitness e conteúdo de lifestyle.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {socialContent.map((content, index) => (
-            <motion.a
-              key={content.platform}
-              href={content.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="group relative overflow-hidden rounded-3xl bg-background-dark-lighter shadow-2xl hover:shadow-accent/20 transition-all duration-300"
-            >
-              <div className="aspect-w-16 aspect-h-9 relative">
-                <Image
-                  src={content.image}
-                  alt={content.title}
-                  fill
-                  className="object-cover transform group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-background-dark/50 to-transparent" />
+    <section id="social" className="py-8 bg-white text-black">
+      <div className="max-w-7xl mx-auto px-8">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-6 md:gap-0 items-center text-center">
+          <div className="md:w-2/3 w-full text-center md:text-left flex flex-col items-center md:items-start">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4 uppercase">JOIN THE BROTHERHOOD</h2>
+            <p className="text-base md:text-lg text-gray-700 max-w-xl">
+              Follow me on Instagram <span className="font-semibold">@diogosamuel</span> for style inspiration, behind-the-scenes, e conteúdo exclusivo.
+            </p>
+          </div>
+          <div className="md:w-1/3 w-full flex md:justify-end justify-center">
+            <Link href="https://instagram.com/diogosamuel" target="_blank" rel="noopener noreferrer">
+              <button className="border-2 border-black px-8 py-3 text-base font-bold rounded-none hover:bg-black hover:text-white transition-colors">
+                Follow me on Instagram
+              </button>
+            </Link>
+          </div>
+        </div>
+        {/* Flex layout: imagem grande + grid de pequenas */}
+        <div className="flex flex-col md:flex-row gap-5 w-full items-stretch min-h-0 justify-center">
+          {/* Imagem grande à esquerda */}
+          <div className="w-full md:w-2/5 flex-shrink-0 flex flex-col">
+            <div className="h-full w-full bg-gray-200 overflow-hidden rounded-none flex-1">
+              <Image src={images[0]} alt="Instagram post 1" fill className="object-cover w-full h-full" />
+            </div>
+          </div>
+          {/* Grid das 6 imagens pequenas à direita */}
+          <div className="w-full md:w-3/5 grid grid-cols-3 grid-rows-2 gap-5 h-full">
+            {images.slice(1).map((src, idx) => (
+              <div key={idx} className="aspect-square bg-gray-200 overflow-hidden rounded-none w-full h-full">
+                <Image src={src} alt={`Instagram post ${idx+2}`} fill className="object-cover w-full h-full" />
               </div>
-              
-              <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                <div className="flex items-center gap-3 mb-4">
-                  <span 
-                    className="text-sm font-medium px-3 py-1 rounded-full"
-                    style={{ 
-                      backgroundColor: `${content.color}20`,
-                      color: content.color
-                    }}
-                  >
-                    {content.platform}
-                  </span>
-                </div>
-                <h3 className="text-3xl font-bold text-foreground mb-3">{content.title}</h3>
-                <p className="text-text-muted text-lg">{content.description}</p>
-              </div>
-
-              {/* Hover effect */}
-              <div className="absolute inset-0 border-2 border-accent/0 group-hover:border-accent/20 rounded-3xl transition-all duration-300" />
-            </motion.a>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

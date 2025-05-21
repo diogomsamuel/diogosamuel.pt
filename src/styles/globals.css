@@ -1,83 +1,158 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Roboto+Condensed:wght@300;400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
-  --brand-primary: #2563eb;
-  --brand-secondary: #1d4ed8;
-  --background-dark: #0a0a0a;
-  --background-dark-lighter: #171717;
-  --accent: #f59e0b;
-  --text-muted: #6b7280;
+  /* Core Colors - Dark tones */
+  --background: #0A0A0A;
+  --background-dark: #050505;
+  --background-dark-lighter: #141414;
+  --background-accent: #1A1A1A;
+  
+  /* Text Colors - White/Light tones */
+  --foreground: #E5E5E5;
+  --text-muted: #A0A0A0;
+  
+  /* Accent Color - Provided by user */
+  --accent: #8B631A;
+  --accent-light: #A0752A;
+  --accent-dark: #705015;
+  
+  /* Metallic Accents (adjusted) */
+  --metallic: #A0752A; /* Using a tone closer to accent */
+  --metallic-light: #B58A3F;
+  --metallic-dark: #8B631A; /* Same as accent */
+  
+  /* Additional Accents (adjusted) */
+  --leather: #3B2F2F; /* Lighter leather tone */
+  --leather-light: #4A3B3B;
+  --leather-dark: #2B1F1F;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+    background-image:
+      linear-gradient(to bottom, rgba(10, 10, 10, 0.97), rgba(10, 10, 10, 0.99)),
+      url('/images/leather-texture.png'); /* Re-adding texture for dark background */
+    background-attachment: fixed;
+    font-family: 'Roboto Condensed', sans-serif;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--background-dark);
-    --foreground: #f3f4f6;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    @apply font-black tracking-wider;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: 'Inter', sans-serif;
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply relative overflow-hidden bg-accent border-2 border-accent-dark px-8 py-4 text-white uppercase tracking-wider hover:bg-accent-dark transition-all duration-300;
+    box-shadow: 0 4px 6px rgba(139, 99, 26, 0.3); /* Adjusted shadow color */
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+
+  .btn-secondary {
+    @apply relative overflow-hidden bg-transparent border-2 border-accent px-8 py-4 text-foreground uppercase tracking-wider hover:bg-accent hover:text-white transition-all duration-300;
+    box-shadow: 0 4px 6px rgba(139, 99, 26, 0.3); /* Adjusted shadow color */
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-6xl font-black text-foreground tracking-wider uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Re-adding text shadow */
+    font-family: 'Playfair Display', serif;
+  }
+
+  .section-divider {
+    @apply w-32 h-1 bg-accent;
+    box-shadow: 0 2px 4px rgba(139, 99, 26, 0.4); /* Adjusted shadow color */
+  }
+
+  .card {
+    @apply relative overflow-hidden border-2 border-accent-light bg-background-dark-lighter; /* Darker card background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /* Adjusted shadow */
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:border-accent hover:shadow-lg hover:shadow-accent-light/40;
+  }
 }
 
-/* Estilizando scrollbar com as cores da marca */
+/* Custom animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background-dark-lighter);
+  background: var(--background-dark);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--brand-primary);
-  border-radius: 4px;
+  background: var(--accent);
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--brand-secondary);
+  background: var(--accent-light);
 }
 
-/* Estilizando o Toast */
+/* Toast Styling */
 .Toastify__toast-container {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 .Toastify__toast {
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Adjusted shadow */
   background-color: var(--background-dark-lighter);
   color: var(--foreground);
+  border: 1px solid var(--accent);
 }
 
 .Toastify__toast--success {
-  background: linear-gradient(135deg, #059669, #10b981);
+  background: var(--background-dark);
+  border-color: var(--accent);
 }
 
 .Toastify__toast--error {
-  background: linear-gradient(135deg, #dc2626, #ef4444);
+  background: var(--background-dark);
+  border-color: var(--accent-dark);
 }
 
 .Toastify__toast--info {
-  background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+  background: var(--background-dark);
+  border-color: var(--accent);
 }
 
 .Toastify__progress-bar {
-  background: linear-gradient(to right, var(--brand-primary), var(--brand-secondary));
+  background: linear-gradient(to right, var(--accent), var(--accent-light));
 }
 
-/* Animações */
+/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -104,4 +179,76 @@ body {
 
 .animate-slide-in {
   animation: slideIn 0.5s ease-out;
+}
+
+/* Decorative Elements (Adjusted/Removed) */
+.corner-accent {
+  @apply hidden; /* Hide corner accents */
+}
+
+.corner-accent-tl {
+  @apply hidden;
+}
+
+.corner-accent-tr {
+  @apply hidden;
+}
+
+.corner-accent-bl {
+  @apply hidden;
+}
+
+.corner-accent-br {
+  @apply hidden;
+}
+
+/* Section Styles (Adjusted) */
+.section-dark {
+  @apply relative overflow-hidden bg-black text-white; /* Keep header dark */
+}
+
+.section-accent {
+  @apply relative overflow-hidden bg-background text-foreground; /* Use background variable */
+}
+
+/* Image Overlays (Adjusted) */
+.image-overlay {
+  @apply absolute inset-0;
+  background: linear-gradient(to bottom, 
+    rgba(10, 10, 10, 0.8), /* Darker overlay */
+    rgba(10, 10, 10, 0.5),
+    rgba(10, 10, 10, 0.8)
+  );
+}
+
+/* Text Styles */
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Re-adding text shadow */
+}
+
+.text-glow {
+  text-shadow: 0 0 15px rgba(139, 99, 26, 0.7); /* Adjusted glow color */
+}
+
+/* Additional Styles (Adjusted/Removed) */
+.leather-border {
+  border: 2px solid var(--leather);
+  box-shadow: 0 0 10px rgba(59, 47, 47, 0.3); /* Adjusted shadow */
+}
+
+.razor-cut {
+  /* Adjust or remove if not needed */
+}
+
+.vintage-text {
+  font-family: 'Playfair Display', serif;
+  @apply tracking-wider;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Re-adding text shadow */
+}
+
+/* Text Justification */
+.text-justify-lines {
+  text-align: justify;
+  /* Optional: adjust hyphenation if needed */
+  /* hyphenate-limit-chars: 6 3 3; */
 }
