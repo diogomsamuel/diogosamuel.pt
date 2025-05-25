@@ -28,8 +28,9 @@ export const Navbar = () => {
 
   return (
     <nav className={navbarClasses}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-        <div className="flex-shrink-0">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 relative">
+        {/* Título centralizado absolutamente em mobile */}
+        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 md:static md:transform-none md:flex-none">
           <Link href="/" className="text-white text-2xl font-black tracking-wider uppercase">
             Diogo Samuel
           </Link>
@@ -40,18 +41,10 @@ export const Navbar = () => {
           <Link href="#about" className={linkClasses}>About</Link>
           <Link href="#barber" className={linkClasses}>Barber</Link>
           <Link href="#social" className={linkClasses}>Social</Link>
-          <Link
-            href="https://calendly.com/diogosamuel"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-accent hover:bg-accent-light text-foreground px-4 py-2 rounded-md transition-colors"
-          >
-            Book Now
-          </Link>
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center">
+        <div className="md:hidden flex items-center w-10 ml-auto">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-[#8B631A] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
@@ -85,15 +78,6 @@ export const Navbar = () => {
               <Link href="#about" className={`${linkClasses} block px-3 py-2 rounded-md text-base font-medium`} onClick={() => setMobileMenuOpen(false)}>About</Link>
               <Link href="#barber" className={`${linkClasses} block px-3 py-2 rounded-md text-base font-medium`} onClick={() => setMobileMenuOpen(false)}>Barber</Link>
               <Link href="#social" className={`${linkClasses} block px-3 py-2 rounded-md text-base font-medium`} onClick={() => setMobileMenuOpen(false)}>Social</Link>
-              <Link
-                href="https://calendly.com/diogosamuel"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block px-3 py-2 bg-accent hover:bg-accent-light text-foreground rounded-md transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Book Now
-              </Link>
             </div>
           </motion.div>
         )}

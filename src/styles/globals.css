@@ -252,3 +252,18 @@
   /* Optional: adjust hyphenation if needed */
   /* hyphenate-limit-chars: 6 3 3; */
 }
+
+/* Barber Section Custom Grid Alignment */
+.barber-grid {
+  align-items: stretch;
+}
+.barber-image-col {
+  display: flex;
+  align-items: stretch;
+}
+.barber-image-wrapper {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  height: 100%;
+  max-width: 420px;
+}
