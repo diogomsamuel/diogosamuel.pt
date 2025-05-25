@@ -46,8 +46,8 @@ export const AboutSection = () => {
               <p>
                 Here's the thing: I'm not interested in following a script. I do things my own way, and I've always been about action over words. What matters is the process, the hustle, and staying focused. I'm not here to please anyone.
               </p>
-              <p className="italic">
-                I'm here to make shit happen.
+              <p className="italic text-[#8B631A] text-center mt-8 text-lg md:text-xl">
+                “They'll label you as vain. I call it a standard.”
               </p>
             </div>
 

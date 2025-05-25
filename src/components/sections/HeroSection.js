@@ -48,13 +48,13 @@ export const HeroSection = () => {
           className="max-w-4xl mx-auto"
         >
           {/* Main Title (Your Name) */}
-          <h1 className="text-5xl md:text-7xl font-black tracking-wider uppercase mb-6 md:mb-8">
+          <h1 className="text-5xl md:text-7xl font-black tracking-wider uppercase mb-2 md:mb-4">
             Diogo Samuel
           </h1>
 
-          {/* Statement Phrase */}
-          <p className="text-lg md:text-2xl text-white/80 font-light mb-10 md:mb-14 italic max-w-2xl mx-auto">
-            "Move quiet. Look sharp. Let the rest talk - that&apos;s the statement."
+          {/* Statement Phrase melhorada para SEO e coesão visual */}
+          <p className="text-base md:text-lg font-medium text-white/70 tracking-wide mb-6 md:mb-8 -mt-2">
+            They talk. I set the standard.
           </p>
 
           {/* CTA Button (coerente com outros sections) */}
