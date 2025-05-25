@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <Head>
-        <title>Diogo Samuel - Personal Trainer & Barber</title>
+        <title>Diogo Samuel</title>
         <meta name="description" content="Personal trainer and professional barber based in Portugal" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
